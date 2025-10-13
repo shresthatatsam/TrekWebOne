@@ -15,16 +15,16 @@
 			position: relative;
 		}
 
-			.progress-steps::before {
-				content: '';
-				position: absolute;
-				top: 20px;
-				left: 0;
-				right: 0;
-				height: 2px;
-				background: #e9ecef;
-				z-index: 1;
-			}
+		.progress-steps::before {
+			content: '';
+			position: absolute;
+			top: 20px;
+			left: 0;
+			right: 0;
+			height: 2px;
+			background: #e9ecef;
+			z-index: 1;
+		}
 
 		.step {
 			display: flex;
@@ -81,19 +81,15 @@
 			animation: fadeIn 0.3s ease-in-out;
 		}
 
-		keyframes fadeIn {
-			from
-
-		{
-			opacity: 0;
-			transform: translateX(20px);
-		}
-
-		to {
-			opacity: 1;
-			transform: translateX(0);
-		}
-
+	keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateX(20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
 		}
 
 		.image-preview {
@@ -106,27 +102,27 @@
 			background: #f9f9f9;
 		}
 
-			.image-preview img {
-				max-width: 200px;
-				max-height: 150px;
-				object-fit: cover;
-				border-radius: 4px;
-			}
+		.image-preview img {
+			max-width: 200px;
+			max-height: 150px;
+			object-fit: cover;
+			border-radius: 4px;
+		}
 
-			.image-preview .remove-image {
-				position: absolute;
-				top: -10px;
-				right: -10px;
-				background: #dc3545;
-				color: white;
-				border: none;
-				border-radius: 50%;
-				width: 30px;
-				height: 30px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
+		.image-preview .remove-image {
+			position: absolute;
+			top: -10px;
+			right: -10px;
+			background: #dc3545;
+			color: white;
+			border: none;
+			border-radius: 50%;
+			width: 30px;
+			height: 30px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 
 		.form-label.required::after {
 			content: " *";
@@ -145,7 +141,7 @@
 			border-radius: 15px 15px 0 0 !important;
 		}
 
-		.highlight-item, .itinerary-item, .inclusion-item, .exclusion-item, .faq-item, .packing-category-item {
+		.highlight-item, .itinerary-item, .inclusion-item, .exclusion-item, .faq-item, .packing-category-item, .group-pricing-item, .fixed-pricing-item {
 			background: #f8f9fa;
 			border: 1px solid #dee2e6;
 			border-radius: 8px;
@@ -153,9 +149,9 @@
 			margin-bottom: 10px;
 		}
 
-			.highlight-item:hover, .itinerary-item:hover, .inclusion-item:hover, .exclusion-item:hover, .faq-item:hover, .packing-category-item:hover {
-				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-			}
+		.highlight-item:hover, .itinerary-item:hover, .inclusion-item:hover, .exclusion-item:hover, .faq-item:hover, .packing-category-item:hover, .group-pricing-item:hover, .fixed-pricing-item:hover {
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		}
 
 		.loading-overlay {
 			position: fixed;
@@ -180,16 +176,12 @@
 		}
 
 		keyframes spin {
-			0%
-
-		{
-			transform: rotate(0deg);
-		}
-
-		100% {
-			transform: rotate(360deg);
-		}
-
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
 		}
 
 		.image-upload-zone {
@@ -202,15 +194,15 @@
 			transition: all 0.3s ease;
 		}
 
-			.image-upload-zone:hover {
-				border-color: #0056b3;
-				background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-			}
+		.image-upload-zone:hover {
+			border-color: #0056b3;
+			background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+		}
 
-			.image-upload-zone.dragover {
-				border-color: #28a745;
-				background: linear-gradient(135deg, #f0fff4 0%, #dcf5dc 100%);
-			}
+		.image-upload-zone.dragover {
+			border-color: #28a745;
+			background: linear-gradient(135deg, #f0fff4 0%, #dcf5dc 100%);
+		}
 
 		.dynamic-item-list {
 			border: 1px solid #dee2e6;
@@ -228,11 +220,11 @@
 			font-size: 0.875rem;
 		}
 
-			.item-tag .remove-item {
-				margin-left: 5px;
-				color: #dc3545;
-				cursor: pointer;
-			}
+		.item-tag .remove-item {
+			margin-left: 5px;
+			color: #dc3545;
+			cursor: pointer;
+		}
 	</style>
 </head>
 <body>
@@ -372,7 +364,7 @@
 
 										<div class="row">
 											<div class="col-md-6 mb-3">
-												<label class="form-label required">Video Url</label>
+												<label class="form-label">Video Url</label>
 												<input type="text" class="form-control" name="TrekVideoUrl" placeholder="Add a url">
 											</div>
 										</div>
@@ -578,17 +570,17 @@
 													<div class="col-12 mb-3">
 														<h6 class="text-primary">Group Pricing 1</h6>
 													</div>
-													<div class="col-md-6 mb-3">
-														<label class="form-label required">Min Group Size</label>
-														<input type="text" class="form-control" name="PackageCostInfo.GroupPricing[0].MinPeople" placeholder="e.g., 1 Pax, 2-3 Pax, 4-6 Pax" required>
+													<div class="col-md-4 mb-3">
+														<label class="form-label required">Min People</label>
+														<input type="number" class="form-control" name="PackageCostInfo.GroupPricing[0].MinPeople" placeholder="e.g., 1" required>
 													</div>
-													<div class="col-md-6 mb-3">
-														<label class="form-label required">Max Group Size</label>
-														<input type="text" class="form-control" name="PackageCostInfo.GroupPricing[0].MaxPeople" placeholder="e.g., 1 Pax, 2-3 Pax, 4-6 Pax" required>
+													<div class="col-md-4 mb-3">
+														<label class="form-label required">Max People</label>
+														<input type="number" class="form-control" name="PackageCostInfo.GroupPricing[0].MaxPeople" placeholder="e.g., 3" required>
 													</div>
-													<div class="col-md-6 mb-3">
+													<div class="col-md-4 mb-3">
 														<label class="form-label required">Price Per Person</label>
-														<input type="text" class="form-control" name="PackageCostInfo.GroupPricing[0].PricePerPerson" placeholder="e.g., $2,500, $2,200" required>
+														<input type="text" class="form-control" name="PackageCostInfo.GroupPricing[0].PricePerPerson" placeholder="e.g., $2,500" required>
 													</div>
 												</div>
 												<div class="text-end">
@@ -598,45 +590,47 @@
 												</div>
 											</div>
 										</div>
-										<button type="button" class="btn btn-outline-primary" id="addGroupPricing">
+										<button type="button" class="btn btn-outline-primary mb-4" id="addGroupPricing">
 											<i class="fas fa-plus"></i> Add Another Group Pricing
 										</button>
 
-										<div id="fixedPricingContainer mt-2">
+										<hr>
+
+										<div class="mb-4">
+											<h6><i class="fas fa-calendar-alt"></i> Fixed Date Pricing</h6>
+											<p class="text-muted small">Add specific pricing for fixed departure dates</p>
+										</div>
+
+										<div id="fixedPricingContainer">
 											<div class="fixed-pricing-item">
 												<div class="row">
 													<div class="col-12 mb-3">
-														<h6 class="text-primary">Fixed Pricing 1</h6>
+														<h6 class="text-success">Fixed Pricing 1</h6>
 													</div>
-
-													<div class="col-md-3 mb-3">
+													<div class="col-md-4 mb-3">
 														<label class="form-label required">From Date</label>
-														<input type="date" class="form-control" name="FixedPricing[0].FromDate">
+														<input type="date" class="form-control" name="trekPackageFixedPricings[0].FromDate" required>
 													</div>
-													<div class="col-md-3 mb-3">
+													<div class="col-md-4 mb-3">
 														<label class="form-label required">To Date</label>
-														<input type="date" class="form-control" name="FixedPricing[0].ToDate">
+														<input type="date" class="form-control" name="trekPackageFixedPricings[0].ToDate" required>
 													</div>
-
-													<div class="col-md-2 mb-3">
+													<div class="col-md-4 mb-3">
 														<label class="form-label required">Price Per Person</label>
-														<input type="text" class="form-control" name="FixedPricing[0].PricePerPerson">
+														<input type="text" class="form-control" name="trekPackageFixedPricings[0].PricePerPerson" placeholder="e.g., $3,000" required>
 													</div>
 												</div>
 												<div class="text-end">
 													<button type="button" class="btn btn-outline-danger btn-sm remove-fixed-pricing" style="display: none;">
-														<i class="fas fa-trash"></i> Remove
+														<i class="fas fa-trash"></i> Remove Fixed Pricing
 													</button>
 												</div>
-												<hr>
 											</div>
 										</div>
 
-										<button type="button" class="btn btn-outline-primary" id="addFixedPricing">
+										<button type="button" class="btn btn-outline-success" id="addFixedPricing">
 											<i class="fas fa-plus"></i> Add Another Fixed Pricing
 										</button>
-
-
 									</div>
 								</div>
 							</div>
@@ -743,10 +737,7 @@
 				});
 			}
 
-
 			setupFixedPricing() {
-
-
 				document.getElementById('addFixedPricing').addEventListener('click', () => {
 					const container = document.getElementById('fixedPricingContainer');
 					const newFixedPricing = document.createElement('div');
@@ -769,32 +760,29 @@
 
 			getFixedPricingTemplate(index) {
 				return `
-						<div class="row">
-							<div class="col-12 mb-3">
-								<h6 class="text-primary">Fixed Pricing ${index + 1}</h6>
-							</div>
-
-							<div class="col-md-3 mb-3">
-								<label class="form-label required">From Date</label>
-								<input type="date" class="form-control" name="FixedPricing[${index}].FromDate" required>
-							</div>
-							<div class="col-md-3 mb-3">
-								<label class="form-label required">To Date</label>
-								<input type="date" class="form-control" name="FixedPricing[${index}].ToDate" required>
-							</div>
-
-							<div class="col-md-2 mb-3">
-								<label class="form-label required">Price Per Person</label>
-								<input type="text" class="form-control" name="FixedPricing[${index}].PricePerPerson" required>
-							</div>
+					<div class="row">
+						<div class="col-12 mb-3">
+							<h6 class="text-success">Fixed Pricing ${index + 1}</h6>
 						</div>
-						<div class="text-end">
-							<button type="button" class="btn btn-outline-danger btn-sm remove-fixed-pricing">
-								<i class="fas fa-trash"></i> Remove
-							</button>
+						<div class="col-md-4 mb-3">
+							<label class="form-label required">From Date</label>
+							<input type="date" class="form-control" name="trekPackageFixedPricings[${index}].FromDate" required>
 						</div>
-						<hr>
-					`;
+						<div class="col-md-4 mb-3">
+							<label class="form-label required">To Date</label>
+							<input type="date" class="form-control" name="trekPackageFixedPricings[${index}].ToDate" required>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label required">Price Per Person</label>
+							<input type="text" class="form-control" name="trekPackageFixedPricings[${index}].PricePerPerson" placeholder="e.g., $3,000" required>
+						</div>
+					</div>
+					<div class="text-end">
+						<button type="button" class="btn btn-outline-danger btn-sm remove-fixed-pricing">
+							<i class="fas fa-trash"></i> Remove Fixed Pricing
+						</button>
+					</div>
+				`;
 			}
 
 			updateFixedPricingIndexes() {
@@ -803,15 +791,14 @@
 					const header = item.querySelector('h6');
 					header.textContent = `Fixed Pricing ${index + 1}`;
 					item.querySelectorAll('input').forEach(input => {
-						if (input.name && input.name.includes('FixedPricing[')) {
+						if (input.name && input.name.includes('trekPackageFixedPricings[')) {
 							const fieldName = input.name.split('.').pop();
-							input.name = `FixedPricing[${index}].${fieldName}`;
+							input.name = `trekPackageFixedPricings[${index}].${fieldName}`;
 						}
 					});
 				});
 				this.fixedPricingIndex = items.length;
 			}
-
 
 			setupSlugGeneration() {
 				const titleInput = document.querySelector('input[name="Title"]');
@@ -863,29 +850,29 @@
 
 			getGroupPricingTemplate(index) {
 				return `
-									<div class="row">
-										<div class="col-12 mb-3">
-											<h6 class="text-primary">Group Pricing ${index + 1}</h6>
-										</div>
-										<div class="col-md-6 mb-3">
-											<label class="form-label required">Group Size</label>
-													<input type="text" class="form-control" name="PackageCostInfo.GroupPricing[${index}].MinPeople" placeholder="e.g., 1 Pax, 2-3 Pax, 4-6 Pax" required>
-										</div>
-												 <div class="col-md-6 mb-3">
-													<label class="form-label required">Group Size</label>
-															<input type="text" class="form-control" name="PackageCostInfo.GroupPricing[${index}].MaxPeople" placeholder="e.g., 1 Pax, 2-3 Pax, 4-6 Pax" required>
-												</div>
-										<div class="col-md-6 mb-3">
-											<label class="form-label required">Price Per Person</label>
-											<input type="text" class="form-control" name="PackageCostInfo.GroupPricing[${index}].PricePerPerson" placeholder="e.g., $2,500, $2,200" required>
-										</div>
-									</div>
-									<div class="text-end">
-										<button type="button" class="btn btn-outline-danger btn-sm remove-group-pricing">
-											<i class="fas fa-trash"></i> Remove Group Pricing
-										</button>
-									</div>
-								`;
+					<div class="row">
+						<div class="col-12 mb-3">
+							<h6 class="text-primary">Group Pricing ${index + 1}</h6>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label required">Min People</label>
+							<input type="number" class="form-control" name="PackageCostInfo.GroupPricing[${index}].MinPeople" placeholder="e.g., 1" required>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label required">Max People</label>
+							<input type="number" class="form-control" name="PackageCostInfo.GroupPricing[${index}].MaxPeople" placeholder="e.g., 3" required>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label required">Price Per Person</label>
+							<input type="text" class="form-control" name="PackageCostInfo.GroupPricing[${index}].PricePerPerson" placeholder="e.g., $2,500" required>
+						</div>
+					</div>
+					<div class="text-end">
+						<button type="button" class="btn btn-outline-danger btn-sm remove-group-pricing">
+							<i class="fas fa-trash"></i> Remove Group Pricing
+						</button>
+					</div>
+				`;
 			}
 
 			updateGroupPricingIndexes() {
@@ -940,43 +927,43 @@
 
 			getFAQTemplate(index) {
 				return `
-									<div class="row">
-										<div class="col-12 mb-3">
-											<h6 class="text-info">FAQ ${index + 1}</h6>
-										</div>
-										<div class="col-md-6 mb-3">
-											<label class="form-label">Category</label>
-											<select class="form-select" name="FAQs[${index}].Category">
-												<option value="">Select Category</option>
-												<option value="General">General</option>
-												<option value="Preparation">Preparation</option>
-												<option value="During Trek">During Trek</option>
-												<option value="Accommodation">Accommodation</option>
-												<option value="Food">Food</option>
-												<option value="Weather">Weather</option>
-												<option value="Equipment">Equipment</option>
-												<option value="Health & Safety">Health & Safety</option>
-												<option value="Permits">Permits</option>
-												<option value="Transportation">Transportation</option>
-											</select>
-										</div>
-										<div class="col-md-6 mb-3">
-											<label class="form-label required">Question</label>
-											<input type="text" class="form-control" name="FAQs[${index}].Question" placeholder="Enter frequently asked question" required>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-12 mb-3">
-											<label class="form-label required">Answer</label>
-											<textarea class="form-control" id="trek-faq-editor-${index}" name="FAQs[${index}].Answer" rows="4" placeholder="Provide detailed answer to the question..." required></textarea>
-										</div>
-									</div>
-									<div class="text-end">
-										<button type="button" class="btn btn-outline-danger btn-sm remove-faq">
-											<i class="fas fa-trash"></i> Remove FAQ
-										</button>
-									</div>
-								`;
+					<div class="row">
+						<div class="col-12 mb-3">
+							<h6 class="text-info">FAQ ${index + 1}</h6>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label">Category</label>
+							<select class="form-select" name="FAQs[${index}].Category">
+								<option value="">Select Category</option>
+								<option value="General">General</option>
+								<option value="Preparation">Preparation</option>
+								<option value="During Trek">During Trek</option>
+								<option value="Accommodation">Accommodation</option>
+								<option value="Food">Food</option>
+								<option value="Weather">Weather</option>
+								<option value="Equipment">Equipment</option>
+								<option value="Health & Safety">Health & Safety</option>
+								<option value="Permits">Permits</option>
+								<option value="Transportation">Transportation</option>
+							</select>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label required">Question</label>
+							<input type="text" class="form-control" name="FAQs[${index}].Question" placeholder="Enter frequently asked question" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 mb-3">
+							<label class="form-label required">Answer</label>
+							<textarea class="form-control" id="trek-faq-editor-${index}" name="FAQs[${index}].Answer" rows="4" placeholder="Provide detailed answer to the question..." required></textarea>
+						</div>
+					</div>
+					<div class="text-end">
+						<button type="button" class="btn btn-outline-danger btn-sm remove-faq">
+							<i class="fas fa-trash"></i> Remove FAQ
+						</button>
+					</div>
+				`;
 			}
 
 			setupItinerary() {
@@ -1015,29 +1002,29 @@
 
 			getItineraryTemplate(index, dayNumber) {
 				return `
-									<div class="row">
-										<div class="col-12 mb-3">
-											<h6 class="text-primary">Day ${dayNumber}</h6>
-										</div>
-										<div class="col-md-6 mb-3">
-											<label class="form-label required">Day Number</label>
-											<input type="number" class="form-control" name="TrekItineraryDays[${index}].DayNumber" value="${dayNumber}" required>
-										</div>
-										<div class="col-md-6 mb-3">
-											<label class="form-label required">Title</label>
-											<input type="text" class="form-control" name="TrekItineraryDays[${index}].Title" placeholder="e.g., Trek to Base Camp" required>
-										</div>
-									</div>
-									<div class="mb-3">
-										<label class="form-label required">Description</label>
-										<textarea class="form-control trek-editor" id="trek-itinerary-editor-${index}" name="TrekItineraryDays[${index}].Description" rows="3" placeholder="Detailed description of the day's activities and what to expect..."></textarea>
-									</div>
-									<div class="text-end">
-										<button type="button" class="btn btn-outline-danger btn-sm remove-itinerary">
-											<i class="fas fa-trash"></i> Remove Day
-										</button>
-									</div>
-								`;
+					<div class="row">
+						<div class="col-12 mb-3">
+							<h6 class="text-primary">Day ${dayNumber}</h6>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label required">Day Number</label>
+							<input type="number" class="form-control" name="TrekItineraryDays[${index}].DayNumber" value="${dayNumber}" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label required">Title</label>
+							<input type="text" class="form-control" name="TrekItineraryDays[${index}].Title" placeholder="e.g., Trek to Base Camp" required>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="form-label required">Description</label>
+						<textarea class="form-control trek-editor" id="trek-itinerary-editor-${index}" name="TrekItineraryDays[${index}].Description" rows="3" placeholder="Detailed description of the day's activities and what to expect..."></textarea>
+					</div>
+					<div class="text-end">
+						<button type="button" class="btn btn-outline-danger btn-sm remove-itinerary">
+							<i class="fas fa-trash"></i> Remove Day
+						</button>
+					</div>
+				`;
 			}
 
 			updateRemoveButtons(containerSelector, removeButtonSelector) {
@@ -1150,7 +1137,8 @@
 							preview: URL.createObjectURL(file),
 							caption: '',
 							subCaption: '',
-							isActive: true
+							isActive: true,
+							ImageType: 'TrekImage'
 						};
 						this.selectedImages.push(imageData);
 					}
@@ -1166,14 +1154,14 @@
 					const previewDiv = document.createElement('div');
 					previewDiv.className = 'image-preview';
 					previewDiv.innerHTML = `
-										<img src="${imageData.preview}" alt="Preview">
-										<button type="button" class="remove-image" onclick="trekManager.removeImage(${index})">
-											<i class="fas fa-times"></i>
-										</button>
-										<div class="mt-2">
-											<small class="text-muted">${imageData.file.name}</small>
-										</div>
-									`;
+						<img src="${imageData.preview}" alt="Preview">
+						<button type="button" class="remove-image" onclick="trekManager.removeImage(${index})">
+							<i class="fas fa-times"></i>
+						</button>
+						<div class="mt-2">
+							<small class="text-muted">${imageData.file.name}</small>
+						</div>
+					`;
 					container.appendChild(previewDiv);
 				});
 			}
@@ -1190,39 +1178,43 @@
 					const detailDiv = document.createElement('div');
 					detailDiv.className = 'row mb-4 p-3 border rounded';
 					detailDiv.innerHTML = `
-										<div class="col-md-3">
-											<img src="${imageData.preview}" class="img-fluid rounded" style="max-height: 150px; object-fit: cover; width: 100%;">
-											<div class="mt-2">
-												<small class="text-muted">${imageData.file.name}</small>
-											</div>
-										</div>
-										<div class="col-md-9">
-											<h6>Image ${index + 1} Details</h6>
-											<div class="row">
-													<div class="col-md-6 mb-3">
-					<label class="form-label required">Image Type</label>
-					<select class="form-select image-detail-input" data-index="${index}" data-field="imageType" required>
-								<option value="1" ${imageData.imageType == "TrekImage" ? 'selected' : ''}>Trek Image</option>
-								<option value="2" ${imageData.imageType == "MapImage" ? 'selected' : ''}>Map Image</option>
-					</select>
-				</div>
-
-													<div class="col-md-6 mb-3">
-													<label class="form-label required">Caption</label>
-													<input type="text" class="form-control image-detail-input" data-index="${index}" data-field="caption" value="${imageData.caption}" placeholder="Enter image caption" required>
-												</div>
-												<div class="col-md-6 mb-3">
-													<label class="form-label">Sub Caption</label>
-													<input type="text" class="form-control image-detail-input" data-index="${index}" data-field="subCaption" value="${imageData.subCaption}" placeholder="Enter sub caption">
-												</div>
-
-											</div>
-										</div>
-									`;
+						<div class="col-md-3">
+							<img src="${imageData.preview}" class="img-fluid rounded" style="max-height: 150px; object-fit: cover; width: 100%;">
+							<div class="mt-2">
+								<small class="text-muted">${imageData.file.name}</small>
+							</div>
+						</div>
+						<div class="col-md-9">
+							<h6>Image ${index + 1} Details</h6>
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<label class="form-label required">Image Type</label>
+									<select class="form-select image-detail-input" data-index="${index}" data-field="ImageType" required>
+										<option value="TrekImage" ${imageData.ImageType === "TrekImage" ? 'selected' : ''}>Trek Image</option>
+										<option value="MapImage" ${imageData.ImageType === "MapImage" ? 'selected' : ''}>Map Image</option>
+									</select>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label class="form-label required">Caption</label>
+									<input type="text" class="form-control image-detail-input" data-index="${index}" data-field="caption" value="${imageData.caption}" placeholder="Enter image caption" required>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label class="form-label">Sub Caption</label>
+									<input type="text" class="form-control image-detail-input" data-index="${index}" data-field="subCaption" value="${imageData.subCaption}" placeholder="Enter sub caption">
+								</div>
+							</div>
+						</div>
+					`;
 					container.appendChild(detailDiv);
 				});
 
 				document.querySelectorAll('.image-detail-input').forEach(input => {
+					input.addEventListener('change', (e) => {
+						const index = parseInt(e.target.dataset.index);
+						const field = e.target.dataset.field;
+						this.selectedImages[index][field] = e.target.value;
+					});
+
 					input.addEventListener('input', (e) => {
 						const index = parseInt(e.target.dataset.index);
 						const field = e.target.dataset.field;
@@ -1300,10 +1292,10 @@
 				alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
 				alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 400px;';
 				alertDiv.innerHTML = `
-									<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'exclamation-circle'}"></i>
-									${message}
-									<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-								`;
+					<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'exclamation-circle'}"></i>
+					${message}
+					<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+				`;
 				document.body.appendChild(alertDiv);
 
 				setTimeout(() => {
@@ -1346,6 +1338,11 @@
 					dataTransfer.items.add(imageData.file);
 					fileInput.files = dataTransfer.files;
 
+					const imageTypeInput = document.createElement('input');
+					imageTypeInput.type = 'hidden';
+					imageTypeInput.name = `Image[${index}].ImageType`;
+					imageTypeInput.value = imageData.ImageType || 'TrekImage';
+
 					const captionInput = document.createElement('input');
 					captionInput.type = 'hidden';
 					captionInput.name = `Image[${index}].Caption`;
@@ -1362,6 +1359,7 @@
 					isActiveInput.value = 'true';
 
 					form.appendChild(fileInput);
+					form.appendChild(imageTypeInput);
 					form.appendChild(captionInput);
 					form.appendChild(subCaptionInput);
 					form.appendChild(isActiveInput);

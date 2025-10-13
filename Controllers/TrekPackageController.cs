@@ -14,6 +14,11 @@ using TrekItineraryDay = UserRoles.Models.Trek.TrekItineraryDay;
 using TrekPackageCostInfo = UserRoles.Models.Trek.TrekPackageCostInfo;
 using TrekPackageFixedPricing = UserRoles.Models.Trek.TrekPackageFixedPricing;
 using TrekPackageGroupPricing = UserRoles.Models.Trek.TrekPackageGroupPricing;
+using TrekFAQDto = UserRoles.Dtos.RequestDtos.TrekFAQ;
+using TrekItineraryDayDto = UserRoles.Dtos.RequestDtos.TrekItineraryDay;
+using TrekPackageCostInfoDto = UserRoles.Dtos.RequestDtos.TrekPackageCostInfo;
+using TrekPackageFixedPricingDto = UserRoles.Dtos.RequestDtos.TrekPackageFixedPricing;
+using TrekPackageGroupPricingDto = UserRoles.Dtos.RequestDtos.TrekPackageGroupPricing;
 
 namespace UserRoles.Controllers
 {
@@ -48,10 +53,85 @@ namespace UserRoles.Controllers
             if (trekPackage == null)
                 return NotFound();
 
+
             return View(trekPackage); // Pass a single TrekPackage
         }
 
+        private TrekPackageRequestDto MapToTrekPackageRequestDto(TrekPackage trekPackage)
+        {
+            var dto = new TrekPackageRequestDto
+            {
+                Id = trekPackage.Id,
+                Title = trekPackage.Title,
+                Slug = trekPackage.Slug,
+                Description = trekPackage.Description,
+                Country = trekPackage.Country,
+                Duration = trekPackage.Duration,
+                Difficulty = trekPackage.Difficulty,
+                Activity = trekPackage.Activity,
+                MaxAltitude = trekPackage.MaxAltitude,
+                BestSeason = trekPackage.BestSeason,
+                Accomodation = trekPackage.Accomodation,
+                Meal = trekPackage.Meal,
+                StartEndPoint = trekPackage.StartEndPoint,
+                TrekOverview = trekPackage.TrekOverview,
+                TrekPackingList = trekPackage.TrekPackingList,
+                TrekingPackageInclusion = trekPackage.TrekingPackageInclusion,
+                TrekingPackageExclusion = trekPackage.TrekingPackageExclusion,
+                TrekHighlight = trekPackage.TrekHighlight,
+                TrekVideoUrl = trekPackage.TrekVideoUrl,
+                PackageCostInfo = new TrekPackageCostInfoDto()
+                {
+                    Id = trekPackage.PackageCostInfo?.Id ?? 0,
+                    BasePrice = trekPackage.PackageCostInfo?.BasePrice ?? 0,
+                    Currency = trekPackage.PackageCostInfo?.Currency,
+                    PriceNote = trekPackage.PackageCostInfo?.PriceNote,
+                    GroupPricing = trekPackage.PackageCostInfo?.GroupPricing?.Select(gp => new TrekPackageGroupPricingDto() {
+                    
+                        Id = gp.Id,
+                        MinPeople = gp.MinPeople,
+                        MaxPeople = gp.MaxPeople,
+                        PricePerPerson = gp.PricePerPerson
+                    }).ToList() ?? new List<TrekPackageGroupPricingDto>(),
+                    TrekPackageId = trekPackage.Id
+                },
+                FAQs = trekPackage.FAQs?.Select(faq => new TrekFAQDto() {
+                
+                    Id = faq.Id,
+                    Category = faq.Category,
+                    Question = faq.Question,
+                    Answer = faq.Answer,
+                    CreatedAt = faq.CreatedAt,
+                    UpdatedAt = faq.UpdatedAt
+                }).ToList() ?? new List<TrekFAQDto>(),
+                TrekItineraryDays = trekPackage.trekItineraryDays?.Select(it => new TrekItineraryDayDto()
+                {
+                    Id = it.Id,
+                    DayNumber = it.DayNumber,
+                    Title = it.Title,
+                    Description = it.Description
+                }).ToList() ?? new List<TrekItineraryDayDto>(),
+                trekPackageFixedPricings = trekPackage.trekPackageFixedPricings?.Select(fp => new TrekPackageFixedPricingDto() { 
+                
+                    Id = fp.Id,
+                    FromDate = fp.FromDate,
+                    ToDate = fp.ToDate,
+                    PricePerPerson = fp.PricePerPerson,
+                    TrekPackageId = fp.TrekPackageId
+                }).ToList() ?? new List<TrekPackageFixedPricingDto>(),
+                Image = trekPackage.TrekPackageImages?.Select(img => new TrekPackageImageRequestDto
+                {
+                    Id = img.Id,
+                    Image = img.Image, // This is the image path or URL
+                    ImageType = img.ImageType,
+                    Caption = img.Caption,
+                    SubCaption = img.SubCaption
+                    // Note: ImageFiles (IFormFile) is null here as it's not needed for display
+                }).ToList() ?? new List<TrekPackageImageRequestDto>()
+            };
 
+            return dto;
+        }
 
         public async Task<IActionResult> BookNow(string slug)
         {
@@ -194,7 +274,9 @@ namespace UserRoles.Controllers
             {
                 return NotFound();
             }
-            return View(model);
+
+            var trekPackageDto = MapToTrekPackageRequestDto(model);
+            return View(trekPackageDto);
         }
 
 
@@ -351,7 +433,8 @@ namespace UserRoles.Controllers
                         TrekPackage = trekPackage,
                         Image = imagePath,
                         Caption = file.Caption,
-                        SubCaption = file.SubCaption
+                        SubCaption = file.SubCaption,
+                        ImageType =file.ImageType
                     });
                 }
             }

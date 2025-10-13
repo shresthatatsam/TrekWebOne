@@ -37,7 +37,7 @@ public class TrekAppService : ITrekAppService
         if (includeCostInfo)
         {
             query = query.Include(t => t.PackageCostInfo)
-                         .ThenInclude(c => c.GroupPricing);
+                         .ThenInclude(c => c.GroupPricing).Include(c=>c.trekPackageFixedPricings);
         }
 
         if (includeItinerary)

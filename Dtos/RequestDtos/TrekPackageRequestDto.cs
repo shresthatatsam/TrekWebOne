@@ -41,7 +41,6 @@ namespace UserRoles.Dtos.RequestDtos
         public List<TrekItineraryDay> TrekItineraryDays { get; set; } = new List<TrekItineraryDay>();
         public List<TrekPackageImageRequestDto> Image { get; set; } = new();
         public string? TrekVideoUrl { get; set; }
-        public List<TrekPackageMapImageRequestDto> mapImage { get; set; } = new();
 
 
     }
@@ -82,6 +81,7 @@ namespace UserRoles.Dtos.RequestDtos
 
     public class TrekFAQ
     {
+        public int Id { get; set; }
         public string? Category { get; set; }
         public string? Question { get; set; }
         public string? Answer { get; set; }
@@ -106,17 +106,12 @@ namespace UserRoles.Dtos.RequestDtos
     {
         public int Id { get; set; }
         public IFormFile ImageFiles { get; set; }
+        public string Image { get; set; }
+        public string? ImageType { get; set; }
         public string? Caption { get; set; }
         public string? SubCaption { get; set; }
         public bool IsActive { get; set; }
     }
 
  
-    public class TrekPackageMapImageRequestDto
-    {
-        public int Id { get; set; }
-        public IFormFile mapImage { get; set; }
-        public string? Caption { get; set; }
-        public bool IsActive { get; set; }
-    }
 }

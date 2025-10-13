@@ -120,5 +120,13 @@
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     }
 
-  
+    public class TrekImageUpload
+    {
+        public IFormFile ImageFile { get; set; }
+        public string Caption { get; set; }
+        public string SubCaption { get; set; }
+        public string ImageType { get; set; }
+        public bool IsActive { get; set; }
+    }
+
 }

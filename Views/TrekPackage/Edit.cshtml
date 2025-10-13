@@ -1,9 +1,7 @@
-﻿ @model UserRoles.Models.Trek.TrekPackage
-
+﻿@model UserRoles.Dtos.RequestDtos.TrekPackageRequestDto
 @{
     ViewData["Title"] = "Edit Trek Package";
 }
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,18 +18,16 @@
             margin-bottom: 2rem;
             position: relative;
         }
-
-            .progress-steps::before {
-                content: '';
-                position: absolute;
-                top: 20px;
-                left: 0;
-                right: 0;
-                height: 2px;
-                background: #e9ecef;
-                z-index: 1;
-            }
-
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e9ecef;
+            z-index: 1;
+        }
         .step {
             display: flex;
             flex-direction: column;
@@ -43,7 +39,6 @@
             min-width: 90px;
             text-align: center;
         }
-
         .step-number {
             width: 35px;
             height: 35px;
@@ -57,51 +52,33 @@
             margin-bottom: 8px;
             font-size: 0.875rem;
         }
-
         .step.active .step-number {
             background: #007bff;
             color: white;
         }
-
         .step.completed .step-number {
             background: #28a745;
             color: white;
         }
-
         .step-title {
             font-size: 0.75rem;
             color: #6c757d;
         }
-
         .step.active .step-title {
             color: #007bff;
             font-weight: 600;
         }
-
         .step.completed .step-title {
             color: #28a745;
             font-weight: 600;
         }
-
         .form-step {
             animation: fadeIn 0.3s ease-in-out;
         }
-
         keyframes fadeIn {
-            from
-
-        {
-            opacity: 0;
-            transform: translateX(20px);
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
-
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        }
-
         .image-preview {
             position: relative;
             display: inline-block;
@@ -111,58 +88,50 @@
             padding: 10px;
             background: #f9f9f9;
         }
-
-            .image-preview img {
-                max-width: 200px;
-                max-height: 150px;
-                object-fit: cover;
-                border-radius: 4px;
-            }
-
-            .image-preview .remove-image {
-                position: absolute;
-                top: -10px;
-                right: -10px;
-                background: #dc3545;
-                color: white;
-                border: none;
-                border-radius: 50%;
-                width: 30px;
-                height: 30px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
+        .image-preview img {
+            max-width: 200px;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .image-preview .remove-image {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .form-label.required::after {
             content: " *";
             color: #dc3545;
         }
-
         .card {
             border: none;
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
         .card-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-radius: 15px 15px 0 0 !important;
         }
-
-        .highlight-item, .itinerary-item, .inclusion-item, .exclusion-item, .faq-item, .packing-category-item {
+        .highlight-item, .itinerary-item, .inclusion-item, .exclusion-item, .faq-item, .packing-category-item, .group-pricing-item, .fixed-pricing-item {
             background: #f8f9fa;
             border: 1px solid #dee2e6;
             border-radius: 8px;
             padding: 15px;
             margin-bottom: 10px;
         }
-
-            .highlight-item:hover, .itinerary-item:hover, .inclusion-item:hover, .exclusion-item:hover, .faq-item:hover, .packing-category-item:hover {
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
-
+        .highlight-item:hover, .itinerary-item:hover, .inclusion-item:hover, .exclusion-item:hover, .faq-item:hover, .packing-category-item:hover, .group-pricing-item:hover, .fixed-pricing-item:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -175,7 +144,6 @@
             justify-content: center;
             z-index: 9999;
         }
-
         .spinner {
             width: 50px;
             height: 50px;
@@ -184,20 +152,10 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
-
         keyframes spin {
-            0%
-
-        {
-            transform: rotate(0deg);
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-
-        100% {
-            transform: rotate(360deg);
-        }
-
-        }
-
         .image-upload-zone {
             border: 3px dashed #007bff;
             border-radius: 15px;
@@ -207,49 +165,23 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
-            .image-upload-zone:hover {
-                border-color: #0056b3;
-                background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            }
-
-            .image-upload-zone.dragover {
-                border-color: #28a745;
-                background: linear-gradient(135deg, #f0fff4 0%, #dcf5dc 100%);
-            }
-
-        .dynamic-item-list {
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
+        .image-upload-zone:hover {
+            border-color: #0056b3;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
         }
-
-        .item-tag {
-            display: inline-block;
-            background: #e9ecef;
-            padding: 4px 8px;
-            margin: 2px;
-            border-radius: 4px;
-            font-size: 0.875rem;
+        .image-upload-zone.dragover {
+            border-color: #28a745;
+            background: linear-gradient(135deg, #f0fff4 0%, #dcf5dc 100%);
         }
-
-            .item-tag .remove-item {
-                margin-left: 5px;
-                color: #dc3545;
-                cursor: pointer;
-            }
     </style>
 </head>
 <body>
-    <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="text-center text-white">
             <div class="spinner"></div>
             <div class="mt-3">Processing your trek package...</div>
         </div>
     </div>
-
     <div class="container-fluid py-4">
         <div class="row justify-content-center">
             <div class="col-12 col-xl-10">
@@ -260,11 +192,10 @@
                         </h3>
                     </div>
                     <div class="card-body">
+                        <div id="alertContainer"></div>
                         <form id="trekPackageForm" method="post" action="/TrekPackage/Edit" enctype="multipart/form-data">
                             @Html.AntiForgeryToken()
                             <input type="hidden" id="selectedTrekId" name="Id" value="@Model.Id" />
-
-                            <!-- Progress Steps -->
                             <div class="row mb-8">
                                 <div class="col-12">
                                     <div class="progress-steps">
@@ -303,8 +234,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Step 1: Trek Package Basic Details -->
                             <div class="form-step active" id="step-1">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -322,7 +251,6 @@
                                                 <input type="hidden" name="Slug" id="slugHidden" value="@Model.Slug">
                                             </div>
                                         </div>
-
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label required">Country</label>
@@ -333,7 +261,6 @@
                                                 <input type="text" class="form-control" name="Duration" value="@Model.Duration" placeholder="e.g., 14 Days" required>
                                             </div>
                                         </div>
-
                                         <div class="row">
                                             <div class="col-md-4 mb-3">
                                                 <label class="form-label required">Difficulty</label>
@@ -354,7 +281,6 @@
                                                 <input type="text" class="form-control" name="MaxAltitude" value="@Model.MaxAltitude" placeholder="e.g., 5,364m" required>
                                             </div>
                                         </div>
-
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label required">Best Season</label>
@@ -365,7 +291,6 @@
                                                 <input type="text" class="form-control" name="StartEndPoint" value="@Model.StartEndPoint" placeholder="e.g., Lukla" required>
                                             </div>
                                         </div>
-
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label required">Accommodation</label>
@@ -376,23 +301,19 @@
                                                 <input type="text" class="form-control" name="Meal" value="@Model.Meal" placeholder="e.g., Breakfast, Lunch, Dinner" required>
                                             </div>
                                         </div>
-
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label required">Video Url</label>
-                                                <input type="text" class="form-control" name="TrekVideoUrl" placeholder="Add a url">
+                                                <input type="text" class="form-control" name="TrekVideoUrl" value="@Model.TrekVideoUrl" placeholder="Add a url">
                                             </div>
                                         </div>
-
                                         <div class="mb-3">
                                             <label class="form-label required">Description</label>
-                                            <textarea class="form-control" id="trek-description-editor" name="Description" rows="4">@Model.Description</textarea>
+                                            <textarea class="form-control" id="trek-description-editor" name="Description" rows="4" required>@Model.Description</textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Step 2: Trek Overview & Highlights -->
                             <div class="form-step" id="step-2" style="display: none;">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -401,17 +322,15 @@
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <label class="form-label required">Overview Description</label>
-                                            <textarea class="form-control" id="trek-overview-editor" name="TrekOverview" rows="8">@Model.TrekOverview</textarea>
+                                            <textarea class="form-control" id="trek-overview-editor" name="TrekOverview" rows="8" required>@Model.TrekOverview</textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label required">Highlights</label>
-                                            <textarea class="form-control" id="trek-highlights-editor" name="TrekHighlight" rows="8">@Model.TrekHighlight</textarea>
+                                            <textarea class="form-control" id="trek-highlights-editor" name="TrekHighlight" rows="8" required>@Model.TrekHighlight</textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Step 3: Trek Itinerary -->
                             <div class="form-step" id="step-3" style="display: none;">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -419,29 +338,30 @@
                                     </div>
                                     <div class="card-body">
                                         <div id="itineraryContainer">
-                                            @for (int i = 0; i < Model.trekItineraryDays.Count; i++)
+                                            @for (int i = 0; i < Model.TrekItineraryDays.Count; i++)
                                             {
+                                                var day = Model.TrekItineraryDays[i];
                                                 <div class="itinerary-item">
-                                                    <input type="hidden" name="TrekItineraryDays[@i].Id" value="@Model.trekItineraryDays[i].Id" />
+                                                    <input type="hidden" name="TrekItineraryDays[@i].Id" value="@day.Id" />
                                                     <div class="row">
                                                         <div class="col-12 mb-3">
                                                             <h6 class="text-primary">Day @(i + 1)</h6>
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label required">Day Number</label>
-                                                            <input type="number" class="form-control" name="TrekItineraryDays[@i].DayNumber" value="@Model.trekItineraryDays[i].DayNumber" required>
+                                                            <input type="number" class="form-control" name="TrekItineraryDays[@i].DayNumber" value="@day.DayNumber" required>
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label required">Title</label>
-                                                            <input type="text" class="form-control" name="TrekItineraryDays[@i].Title" value="@Model.trekItineraryDays[i].Title" required>
+                                                            <input type="text" class="form-control" name="TrekItineraryDays[@i].Title" value="@day.Title" required>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label required">Description</label>
-                                                        <textarea class="form-control trek-editor" id="trek-itinerary-editor-@i" name="TrekItineraryDays[@i].Description" rows="3">@Model.trekItineraryDays[i].Description</textarea>
+                                                        <textarea class="form-control trek-editor" id="trek-itinerary-editor-@i" name="TrekItineraryDays[@i].Description" rows="3" required>@day.Description</textarea>
                                                     </div>
                                                     <div class="text-end">
-                                                        <button type="button" class="btn btn-outline-danger btn-sm remove-itinerary" @(Model.trekItineraryDays.Count > 1 ? "" : "style=\"display:none;\"")>
+                                                        <button type="button" class="btn btn-outline-danger btn-sm remove-itinerary">
                                                             <i class="fas fa-trash"></i> Remove Day
                                                         </button>
                                                     </div>
@@ -454,8 +374,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Step 4: Package Inclusions & Exclusions -->
                             <div class="form-step" id="step-4" style="display: none;">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -464,19 +382,17 @@
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <label class="form-label required">Inclusions</label>
-                                            <textarea class="form-control" id="trek-inclusions-editor" name="TrekingPackageInclusion" rows="8">@Model.TrekingPackageInclusion</textarea>
+                                            <textarea class="form-control" id="trek-inclusions-editor" name="TrekingPackageInclusion" rows="8" required>@Model.TrekingPackageInclusion</textarea>
                                             <small class="form-text text-muted">List all inclusions to give trekkers a clear understanding of what's covered.</small>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label required">Exclusions</label>
-                                            <textarea class="form-control" id="trek-exclusions-editor" name="TrekingPackageExclusion" rows="8">@Model.TrekingPackageExclusion</textarea>
+                                            <textarea class="form-control" id="trek-exclusions-editor" name="TrekingPackageExclusion" rows="8" required>@Model.TrekingPackageExclusion</textarea>
                                             <small class="form-text text-muted">List all exclusions to set clear expectations for trekkers.</small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Step 5: Packing List -->
                             <div class="form-step" id="step-5" style="display: none;">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -485,13 +401,11 @@
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <label class="form-label required">Packing List</label>
-                                            <textarea class="form-control" id="trek-packing-editor" name="TrekPackingList" rows="8">@Model.TrekPackingList</textarea>
+                                            <textarea class="form-control" id="trek-packing-editor" name="TrekPackingList" rows="8" required>@Model.TrekPackingList</textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Step 6: FAQs -->
                             <div class="form-step" id="step-6" style="display: none;">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -501,8 +415,9 @@
                                         <div id="faqsContainer">
                                             @for (int i = 0; i < Model.FAQs.Count; i++)
                                             {
+                                                var faq = Model.FAQs[i];
                                                 <div class="faq-item">
-                                                    <input type="hidden" name="FAQs[@i].Id" value="@Model.FAQs[i].Id" />
+                                                    <input type="hidden" name="FAQs[@i].Id" value="@faq.Id" />
                                                     <div class="row">
                                                         <div class="col-12 mb-3">
                                                             <h6 class="text-info">FAQ @(i + 1)</h6>
@@ -511,29 +426,29 @@
                                                             <label class="form-label">Category</label>
                                                             <select class="form-select" name="FAQs[@i].Category">
                                                                 <option value="">Select Category</option>
-                                                                <option value="General" selected="@(Model.FAQs[i].Category == "General")">General</option>
-                                                                <option value="Preparation" selected="@(Model.FAQs[i].Category == "Preparation")">Preparation</option>
-                                                                <option value="During Trek" selected="@(Model.FAQs[i].Category == "During Trek")">During Trek</option>
-                                                                <option value="Accommodation" selected="@(Model.FAQs[i].Category == "Accommodation")">Accommodation</option>
-                                                                <option value="Food" selected="@(Model.FAQs[i].Category == "Food")">Food</option>
-                                                                <option value="Weather" selected="@(Model.FAQs[i].Category == "Weather")">Weather</option>
-                                                                <option value="Equipment" selected="@(Model.FAQs[i].Category == "Equipment")">Equipment</option>
-                                                                <option value="Health & Safety" selected="@(Model.FAQs[i].Category == "Health & Safety")">Health & Safety</option>
-                                                                <option value="Permits" selected="@(Model.FAQs[i].Category == "Permits")">Permits</option>
-                                                                <option value="Transportation" selected="@(Model.FAQs[i].Category == "Transportation")">Transportation</option>
+                                                                <option value="General" selected="@(faq.Category == "General")">General</option>
+                                                                <option value="Preparation" selected="@(faq.Category == "Preparation")">Preparation</option>
+                                                                <option value="During Trek" selected="@(faq.Category == "During Trek")">During Trek</option>
+                                                                <option value="Accommodation" selected="@(faq.Category == "Accommodation")">Accommodation</option>
+                                                                <option value="Food" selected="@(faq.Category == "Food")">Food</option>
+                                                                <option value="Weather" selected="@(faq.Category == "Weather")">Weather</option>
+                                                                <option value="Equipment" selected="@(faq.Category == "Equipment")">Equipment</option>
+                                                                <option value="Health & Safety" selected="@(faq.Category == "Health & Safety")">Health & Safety</option>
+                                                                <option value="Permits" selected="@(faq.Category == "Permits")">Permits</option>
+                                                                <option value="Transportation" selected="@(faq.Category == "Transportation")">Transportation</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label required">Question</label>
-                                                            <input type="text" class="form-control" name="FAQs[@i].Question" value="@Model.FAQs[i].Question" required>
+                                                            <input type="text" class="form-control" name="FAQs[@i].Question" value="@faq.Question" required>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label required">Answer</label>
-                                                        <textarea class="form-control" id="trek-faq-editor-@i" name="FAQs[@i].Answer" rows="4">@Model.FAQs[i].Answer</textarea>
+                                                        <textarea class="form-control faq-editor" id="trek-faq-editor-@i" name="FAQs[@i].Answer" rows="4" required>@faq.Answer</textarea>
                                                     </div>
                                                     <div class="text-end">
-                                                        <button type="button" class="btn btn-outline-danger btn-sm remove-faq" @(Model.FAQs.Count > 1 ? "" : "style=\"display:none;\"")>
+                                                        <button type="button" class="btn btn-outline-danger btn-sm remove-faq">
                                                             <i class="fas fa-trash"></i> Remove FAQ
                                                         </button>
                                                     </div>
@@ -546,8 +461,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Step 7: Cost Information -->
                             <div class="form-step" id="step-7" style="display: none;">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -578,121 +491,201 @@
                                                 <input type="text" class="form-control" name="PackageCostInfo.PriceNote" value="@Model.PackageCostInfo.PriceNote">
                                             </div>
                                         </div>
-
                                         <hr>
-
                                         <div class="mb-4">
                                             <h6><i class="fas fa-users"></i> Group Pricing</h6>
                                             <p class="text-muted small">Add different pricing based on group sizes</p>
                                         </div>
-
                                         <div id="groupPricingContainer">
                                             @for (int i = 0; i < Model.PackageCostInfo.GroupPricing.Count; i++)
                                             {
+                                                var pricing = Model.PackageCostInfo.GroupPricing[i];
                                                 <div class="group-pricing-item">
-                                                    <input type="hidden" name="PackageCostInfo.GroupPricing[@i].Id" value="@Model.PackageCostInfo.GroupPricing[i].Id" />
+                                                    <input type="hidden" name="PackageCostInfo.GroupPricing[@i].Id" value="@pricing.Id" />
                                                     <div class="row">
                                                         <div class="col-12 mb-3">
                                                             <h6 class="text-primary">Group Pricing @(i + 1)</h6>
                                                         </div>
-                                                        <div class="col-md-6 mb-3">
+                                                        <div class="col-md-4 mb-3">
                                                             <label class="form-label required">Min Group Size</label>
-                                                            <input type="text" class="form-control" name="PackageCostInfo.GroupPricing[@i].MinPeople" value="@Model.PackageCostInfo.GroupPricing[i].MinPeople" required>
+                                                            <input type="number" class="form-control" name="PackageCostInfo.GroupPricing[@i].MinPeople" value="@pricing.MinPeople" required min="1">
                                                         </div>
-                                                        <div class="col-md-6 mb-3">
+                                                        <div class="col-md-4 mb-3">
                                                             <label class="form-label required">Max Group Size</label>
-                                                            <input type="text" class="form-control" name="PackageCostInfo.GroupPricing[@i].MaxPeople" value="@Model.PackageCostInfo.GroupPricing[i].MaxPeople" required>
+                                                            <input type="number" class="form-control" name="PackageCostInfo.GroupPricing[@i].MaxPeople" value="@pricing.MaxPeople" required min="1">
                                                         </div>
-                                                        <div class="col-md-6 mb-3">
+                                                        <div class="col-md-4 mb-3">
                                                             <label class="form-label required">Price Per Person</label>
-                                                            <input type="text" class="form-control" name="PackageCostInfo.GroupPricing[@i].PricePerPerson" value="@Model.PackageCostInfo.GroupPricing[i].PricePerPerson" required>
+                                                            <input type="number" step="0.01" class="form-control" name="PackageCostInfo.GroupPricing[@i].PricePerPerson" value="@pricing.PricePerPerson" required min="0">
                                                         </div>
                                                     </div>
                                                     <div class="text-end">
-                                                        <button type="button" class="btn btn-outline-danger btn-sm remove-group-pricing" @(Model.PackageCostInfo.GroupPricing.Count > 1 ? "" : "style=\"display:none;\"")>
+                                                        <button type="button" class="btn btn-outline-danger btn-sm remove-group-pricing">
                                                             <i class="fas fa-trash"></i> Remove Group Pricing
                                                         </button>
                                                     </div>
                                                 </div>
                                             }
                                         </div>
-                                        <button type="button" class="btn btn-outline-primary" id="addGroupPricing">
+                                        <button type="button" class="btn btn-outline-primary mb-4" id="addGroupPricing">
                                             <i class="fas fa-plus"></i> Add Another Group Pricing
+                                        </button>
+                                        <hr>
+                                        <div class="mb-4">
+                                            <h6><i class="fas fa-calendar-alt"></i> Fixed Date Pricing</h6>
+                                            <p class="text-muted small">Add specific pricing for fixed departure dates</p>
+                                        </div>
+                                        <div id="fixedPricingContainer">
+                                            @if (Model.trekPackageFixedPricings != null)
+                                            {
+                                                @for (int i = 0; i < Model.trekPackageFixedPricings.Count; i++)
+                                                {
+                                                    var fixedPricing = Model.trekPackageFixedPricings[i];
+                                                    <div class="fixed-pricing-item">
+                                                        <input type="hidden" name="TrekPackageFixedPricings[@i].Id" value="@fixedPricing.Id" />
+                                                        <div class="row">
+                                                            <div class="col-12 mb-3">
+                                                                <h6 class="text-success">Fixed Pricing @(i + 1)</h6>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3">
+                                                                <label class="form-label required">From Date</label>
+                                                                <input type="date" class="form-control" name="TrekPackageFixedPricings[@i].FromDate" value="@fixedPricing.FromDate.ToString("yyyy-MM-dd")" required>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3">
+                                                                <label class="form-label required">To Date</label>
+                                                                <input type="date" class="form-control" name="TrekPackageFixedPricings[@i].ToDate" value="@fixedPricing.ToDate.ToString("yyyy-MM-dd")" required>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3">
+                                                                <label class="form-label required">Price Per Person</label>
+                                                                <input type="number" step="0.01" class="form-control" name="TrekPackageFixedPricings[@i].PricePerPerson" value="@fixedPricing.PricePerPerson" required min="0">
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-end">
+                                                            <button type="button" class="btn btn-outline-danger btn-sm remove-fixed-pricing">
+                                                                <i class="fas fa-trash"></i> Remove Fixed Pricing
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                        <button type="button" class="btn btn-outline-success" id="addFixedPricing">
+                                            <i class="fas fa-plus"></i> Add Another Fixed Pricing
                                         </button>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Step 8: Image Upload -->
-                            <div class="form-step" id="step-8" style="display: none;">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <h5 class="mb-0"><i class="fas fa-images"></i> Upload Trek Images</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <!-- Existing Images -->
-                                        <div id="existingImagesContainer" class="mb-4">
-                                            <h6>Existing Images</h6>
-                                            <div class="d-flex flex-wrap" id="existingImagePreviews">
-                                                @for (int i = 0; i < Model.TrekPackageImages.Count; i++)
+
+<div class="form-step" id="step-8" style="display: none;">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-images"></i> Trek Images</h5>
+        </div>
+        <div class="card-body">
+            <!-- Existing Images -->
+             <h6 class="mb-3"><i class="fas fa-image"></i> Existing Images</h6>
+            <div id="existingImagePreviews" class="d-flex flex-wrap mb-4">
+                @if (Model.Image != null && Model.Image.Any())
+                {
+                    @for (int i = 0; i < Model.Image.Count; i++)
+                    {
+                        var img = Model.Image[i];
+                        var imageUrl = !string.IsNullOrEmpty(img.Image) ? Url.Content($"{img.Image}") : Url.Content("~/images/placeholder.png");
+                        <div class="image-preview existing-image" data-index="@i">
+                            <img src="@imageUrl" alt="@(img.Caption ?? $"Existing Trek Image {i + 1}")" class="img-fluid rounded" style="max-width: 200px; max-height: 150px; object-fit: cover;" onerror="this.src='@Url.Content("~/images/placeholder.png")'; this.alt='Placeholder Image';">
+                            <button type="button" class="remove-image btn btn-danger btn-sm rounded-circle" data-index="@i" style="position: absolute; top: -10px; right: -10px;" aria-label="Remove image @(i + 1)">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <div class="mt-2">
+                                <small class="text-muted">@(img.Caption ?? "No caption")</small>
+                            </div>
+                            <input type="hidden" name="TrekPackageImages[@i].Id" value="@img.Id" />
+                            <input type="hidden" name="TrekPackageImages[@i].Image" value="@img.Image" />
+                            <input type="hidden" class="caption-input" name="TrekPackageImages[@i].Caption" value="@(img.Caption ?? "")" />
+                            <input type="hidden" class="subcaption-input" name="TrekPackageImages[@i].SubCaption" value="@(img.SubCaption ?? "")" />
+                            <input type="hidden" class="imagetype-input" name="TrekPackageImages[@i].ImageType" value="@(img.ImageType ?? "TrekImage")" />
+                            <input type="hidden" class="delete-flag" name="DeleteImageIds[@i]" value="" disabled />
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="text-muted">No existing images.</p>
+                }
+            </div> 
+            <!-- Existing Image Details for Editing -->
+                                        <h6 class="mb-3"><i class="fas fa-edit"></i> Edit Existing Image Details</h6>
+                                        <div id="existingImageDetailsContainer" class="mb-4">
+                                            @if (Model.Image != null && Model.Image.Any())
+                                            {
+                                                <hr>
+                                                @for (int i = 0; i < Model.Image.Count; i++)
                                                 {
-                                                    var image = Model.TrekPackageImages[i];
-                                                    <div class="image-preview existing-image" data-index="@i">
-                                                        <img src="@image.Image" alt="Existing Image">
-                                                        <button type="button" class="remove-image" onclick="trekManager.removeExistingImage(@i)">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                        <div class="mt-2">
-                                                            <small class="text-muted">@(image.Caption ?? image.Image)</small>
+                                                    var img = Model.Image[i];
+                                                    var imageUrl = !string.IsNullOrEmpty(img.Image) ? Url.Content($"{img.Image}") : Url.Content("~/images/placeholder.png");
+                                                    <div class="row mb-4 p-3 border rounded existing-image-details" data-index="@i">
+                                                        <div class="col-md-3">
+                                                            <img src="@imageUrl" alt="@(img.Caption ?? $"Existing Trek Image {i + 1}")" class="img-fluid rounded" style="max-height: 150px; object-fit: cover; width: 100%;" onerror="this.src='@Url.Content("~/images/placeholder.png")'; this.alt='Placeholder Image';">
+                                                            <div class="mt-2">
+                                                                <small class="text-muted">@(img.Caption ?? "No caption")</small>
+                                                            </div>
                                                         </div>
-                                                        <input type="hidden" name="TrekPackageImages[@i].Id" value="@image.Id" />
-                                                        <input type="hidden" name="TrekPackageImages[@i].Image" value="@image.Image" />
-                                                        <input type="hidden" name="TrekPackageImages[@i].Caption" value="@image.Caption" />
-                                                        <input type="hidden" name="TrekPackageImages[@i].SubCaption" value="@image.SubCaption" />
-                                                        <input type="hidden" class="delete-flag" name="DeleteImageIds" value="" disabled />
+                                                        <div class="col-md-9">
+                                                            <h6>Image @(i + 1) Details</h6>
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label for="imageType_@i" class="form-label required">Image Type</label>
+                                                                    <select class="form-select imagetype-input" id="imageType_@i" name="TrekPackageImages[@i].ImageType">
+                                                                        <option value="TrekImage" selected="@(img.ImageType == "TrekImage")">Trek Image</option>
+                                                                        <option value="MapImage" selected="@(img.ImageType == "MapImage")">Map Image</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label for="caption_@i" class="form-label required">Caption</label>
+                                                                    <input type="text" class="form-control caption-input" id="caption_@i" name="TrekPackageImages[@i].Caption" value="@(img.Caption ?? "")" placeholder="Enter image caption">
+                                                                </div>
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label for="subCaption_@i" class="form-label">Sub Caption</label>
+                                                                    <input type="text" class="form-control subcaption-input" id="subCaption_@i" name="TrekPackageImages[@i].SubCaption" value="@(img.SubCaption ?? "")" placeholder="Enter sub caption">
+                                                                </div>
+                                                                <input type="hidden" class="image-input" name="TrekPackageImages[@i].Image" value="@(img.Image ?? "")" />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 }
-                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <p class="text-muted">No existing images to edit.</p>
+                                            }
                                         </div>
-
-                                        <!-- Image Upload Zone -->
-                                        <div class="image-upload-zone" id="imageUploadZone">
-                                            <i class="fas fa-cloud-upload-alt fa-3x mb-3 text-primary"></i>
-                                            <h5>Drag & Drop Images Here</h5>
-                                            <p class="text-muted">Or click to select files</p>
-                                            <input type="file" id="imageInput" multiple accept="image/*" style="display: none;">
+                                        <!-- New Image Uploads -->
+                                        <h6 class="mb-3"><i class="fas fa-upload"></i> Upload New Images</h6>
+                                        <div class="image-upload-zone mb-4" id="imageUploadZone" role="button" aria-label="Upload new images">
+                                            <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
+                                            <p class="mb-2">Drag & drop images here or click to select</p>
+                                            <small class="text-muted">Supported formats: JPG, PNG, GIF (Max 5MB each)</small>
                                         </div>
-
-                                        <!-- Image Previews -->
-                                        <div id="imagePreviews" class="mt-4"></div>
-
-                                        <!-- Add More Images Button -->
-                                        <div class="text-center mt-3">
-                                            <button type="button" class="btn btn-outline-primary" id="addMoreImages">
-                                                <i class="fas fa-plus"></i> Add More Images
-                                            </button>
-                                        </div>
-
-                                        <!-- Image Details -->
-                                        <div id="imageDetailsContainer" class="mt-4"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Navigation Buttons -->
+                                        <input type="file" id="imageInput" multiple accept="image/jpeg,image/png,image/gif" style="display: none;" aria-label="Select image files">
+                                        <div id="imagePreviews" class="d-flex flex-wrap mb-4"></div>
+                                        <div id="imageDetailsContainer"></div>
+                                        <button type="button" class="btn btn-outline-secondary" id="addMoreImages" aria-label="Add more images">
+                                            <i class="fas fa-plus"></i> Add More Images
+                                        </button>
+        </div>
+    </div>
+</div>
                             <div class="d-flex justify-content-between mt-4">
                                 <button type="button" class="btn btn-secondary" id="prevStep" style="display: none;">
-                                    <i class="fas fa-chevron-left"></i> Previous
+                                    <i class="fas fa-arrow-left"></i> Previous
                                 </button>
-                                <div></div>
-                                <div>
-                                    <button type="button" class="btn btn-primary btn-lg" id="nextStep">
-                                        Next <i class="fas fa-chevron-right"></i>
-                                    </button>
-                                    <button type="submit" class="btn btn-success btn-lg" id="submitBtn" style="display: none;">
-                                        <i class="fas fa-save"></i> Update Trek Package
-                                    </button>
-                                </div>
+                                <button type="button" class="btn btn-primary" id="nextStep">
+                                    <i class="fas fa-arrow-right"></i> Next
+                                </button>
+                                <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">
+                                    <i class="fas fa-save"></i> Update Trek Package
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -700,84 +693,174 @@
             </div>
         </div>
     </div>
-
-    <!-- Hidden input to store JSON data -->
-    @* <input type="hidden" id="existingImagesJson" value="@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(Json.Serialize(Model.TrekPackageImages.Select(img => new { id = img.Id, preview = img.Image, caption = img.Caption ?? "", subCaption = img.SubCaption ?? "", isDeleted = false }))))" /> *@
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
         class TrekPackageManager {
             constructor() {
-                this.currentStep = 1;
                 this.totalSteps = 8;
-                this.selectedImages = [];
-                try {
-                    const existingImagesJson = document.getElementById('existingImagesJson').value;
-                    this.existingImages = existingImagesJson ? JSON.parse(existingImagesJson) : [];
-                } catch (e) {
-                    console.error('Error parsing existingImages JSON:', e);
-                    this.existingImages = [];
-                    this.showAlert('Failed to load existing images. Please try again.', 'danger');
-                }
-                this.itineraryIndex = @Model.trekItineraryDays.Count;
+                this.currentStep = 1;
+                this.itineraryIndex = @Model.TrekItineraryDays.Count;
                 this.faqIndex = @Model.FAQs.Count;
                 this.groupPricingIndex = @Model.PackageCostInfo.GroupPricing.Count;
-
+                this.fixedPricingIndex = @(Model.trekPackageFixedPricings?.Count ?? 0);
+                this.selectedImages = [];
+                this.existingImages = [];
+                this.deletedImageIds = [];
                 this.init();
             }
 
             init() {
+                this.initTinyMCE();
+                this.loadExistingImages();
                 this.setupEventListeners();
-                this.setupDragAndDrop();
                 this.setupSlugGeneration();
                 this.setupItinerary();
                 this.setupFAQs();
                 this.setupGroupPricing();
-                this.setupTinyMCE();
+                this.setupFixedPricing();
+                this.setupDragAndDrop();
+                this.renderImagePreviews();
+                this.renderImageDetails();
             }
 
-            setupTinyMCE() {
-                try {
-                    tinymce.init({
-                        selector: '#trek-description-editor, #trek-overview-editor, #trek-highlights-editor, #trek-inclusions-editor, #trek-exclusions-editor, #trek-packing-editor, .trek-editor',
-                        height: 400,
-                        menubar: false,
-                        plugins: 'link image lists code',
-                        toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright | bullist numlist | link image | code',
-                        style_formats: [
-                            { title: 'Heading 2', block: 'h2' },
-                            { title: 'Heading 3', block: 'h3' },
-                            { title: 'Heading 4', block: 'h4' },
-                            { title: 'Paragraph', block: 'p' }
-                        ],
-                        image_uploadtab: true,
-                        branding: false,
-                        setup: (editor) => {
-                            editor.on('change', () => {
-                                editor.save();
-                            });
-                        }
+            loadExistingImages() {
+                $('.existing-image-details').each((index, element) => {
+                    const $el = $(element);
+                    const id = parseInt($el.data('id'));
+                    const imagePath = $el.find('.existing-image-path').val();
+                    const caption = $el.find('.existing-caption').val();
+                    const subCaption = $el.find('.existing-subcaption').val();
+                    const imageType = $el.find('.existing-imagetype').val();
+
+                    this.existingImages.push({
+                        id: id,
+                        imagePath: imagePath,
+                        caption: caption,
+                        subCaption: subCaption,
+                        imageType: imageType,
+                        isDeleted: false,
+                        originalIndex: index
                     });
-                } catch (e) {
-                    console.error('Error initializing TinyMCE:', e);
-                    this.showAlert('Failed to initialize text editor. Some features may not work.', 'warning');
+                });
+                console.log('Loaded existing images:', this.existingImages);
+            }
+
+            initTinyMCE() {
+                tinymce.init({
+                    selector: '#trek-description-editor, #trek-overview-editor, #trek-highlights-editor, #trek-inclusions-editor, #trek-exclusions-editor, #trek-packing-editor',
+                    height: 300,
+                    menubar: false,
+                    plugins: 'lists link image',
+                    toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image',
+                    branding: false,
+                    setup: (editor) => {
+                        editor.on('change', () => {
+                            editor.save();
+                        });
+                    }
+                });
+                tinymce.init({
+                    selector: '.trek-editor, .faq-editor',
+                    height: 200,
+                    menubar: false,
+                    plugins: 'lists link',
+                    toolbar: 'bold italic underline | bullist numlist | link',
+                    branding: false,
+                    setup: (editor) => {
+                        editor.on('change', () => {
+                            editor.save();
+                        });
+                    }
+                });
+            }
+
+            setupEventListeners() {
+                $('#nextStep').on('click', () => this.showNextStep());
+                $('#prevStep').on('click', () => this.showPrevStep());
+                $('.progress-steps .step').on('click', (e) => {
+                    const newStep = parseInt($(e.currentTarget).attr('data-step'));
+                    if (newStep < this.currentStep || this.validateStep(this.currentStep)) {
+                        this.currentStep = newStep;
+                        this.updateStepUI();
+                    }
+                });
+                $('#trekPackageForm').on('submit', (e) => this.handleSubmit(e));
+                $('#imageUploadZone').on('click', () => $('#imageInput').trigger('click'));
+                $('#imageInput').on('change', (e) => this.handleImageFiles(e.target.files));
+                $('#addMoreImages').on('click', () => $('#imageInput').trigger('click'));
+
+                // Handle existing image removal
+                $(document).on('click', '.existing-image .remove-image', (e) => {
+                    const $button = $(e.currentTarget);
+                    const id = parseInt($button.data('id'));
+                    const index = parseInt($button.data('index'));
+                    this.removeExistingImage(id, index);
+                });
+
+                // Handle new image removal
+                $(document).on('click', '.new-image .remove-image', (e) => {
+                    const $button = $(e.currentTarget);
+                    const index = parseInt($button.data('index'));
+                    this.removeNewImage(index);
+                });
+
+                // Update existing image data on change
+                $('.existing-caption, .existing-subcaption, .existing-imagetype').on('change', (e) => {
+                    const $el = $(e.target);
+                    const index = parseInt($el.data('index'));
+                    const imgObj = this.existingImages[index];
+
+                    if (imgObj) {
+                        if ($el.hasClass('existing-caption')) {
+                            imgObj.caption = $el.val();
+                        } else if ($el.hasClass('existing-subcaption')) {
+                            imgObj.subCaption = $el.val();
+                        } else if ($el.hasClass('existing-imagetype')) {
+                            imgObj.imageType = $el.val();
+                        }
+                    }
+                });
+            }
+
+            removeExistingImage(id, index) {
+                const imgObj = this.existingImages.find(img => img.id === id);
+                if (imgObj) {
+                    imgObj.isDeleted = true;
+                    if (!this.deletedImageIds.includes(id)) {
+                        this.deletedImageIds.push(id);
+                    }
+
+                    // Mark as deleted in UI
+                    $(`.existing-image[data-id="${id}"]`).addClass('image-marked-delete');
+                    $(`.existing-image-details[data-id="${id}"]`).addClass('image-marked-delete');
+
+                    console.log('Marked for deletion:', id);
+                    console.log('Deleted IDs:', this.deletedImageIds);
+                }
+            }
+
+            removeNewImage(index) {
+                if (this.selectedImages[index]) {
+                    URL.revokeObjectURL(this.selectedImages[index].preview);
+                    this.selectedImages.splice(index, 1);
+                    this.renderImagePreviews();
+                    this.renderImageDetails();
                 }
             }
 
             setupSlugGeneration() {
-                const titleInput = document.querySelector('input[name="Title"]');
-                const slugInput = document.querySelector('input[name="Slug"]');
-                const slugHidden = document.getElementById('slugHidden');
-
-                titleInput.addEventListener('input', (e) => {
-                    const title = e.target.value;
+                const $titleInput = $('input[name="Title"]');
+                const $slugInput = $('input[name="Slug"]:not(#slugHidden)');
+                const $slugHidden = $('#slugHidden');
+                $titleInput.on('input', (e) => {
+                    const title = $(e.target).val();
                     const slug = this.generateSlug(title);
-                    slugInput.value = slug;
-                    slugHidden.value = slug;
+                    $slugInput.val(slug);
+                    $slugHidden.val(slug);
                 });
-
-                slugInput.addEventListener('input', (e) => {
-                    slugHidden.value = e.target.value;
+                $slugInput.on('input', (e) => {
+                    $slugHidden.val($(e.target).val());
                 });
             }
 
@@ -790,582 +873,672 @@
                     .trim();
             }
 
-            setupGroupPricing() {
-                document.getElementById('addGroupPricing').addEventListener('click', () => {
-                    const container = document.getElementById('groupPricingContainer');
-                    const newGroupPricing = document.createElement('div');
-                    newGroupPricing.className = 'group-pricing-item';
-                    newGroupPricing.innerHTML = this.getGroupPricingTemplate(this.groupPricingIndex);
-                    container.appendChild(newGroupPricing);
-                    this.groupPricingIndex++;
-                    this.updateRemoveButtons('.group-pricing-item', '.remove-group-pricing');
-                });
-
-                document.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('remove-group-pricing') || e.target.closest('.remove-group-pricing')) {
-                        const groupPricingItem = e.target.closest('.group-pricing-item');
-                        groupPricingItem.remove();
-                        this.updateGroupPricingIndexes();
-                        this.updateRemoveButtons('.group-pricing-item', '.remove-group-pricing');
-                    }
-                });
-            }
-
-            getGroupPricingTemplate(index) {
-                return `
-                            <div class="row">
-                                <div class="col-12 mb-3">
-                                    <h6 class="text-primary">Group Pricing ${index + 1}</h6>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label required">Group Size</label>
-                                    <input type="text" class="form-control" name="PackageCostInfo.GroupPricing[${index}].GroupSize" placeholder="e.g., 1 Pax, 2-3 Pax, 4-6 Pax" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label required">Price Per Person</label>
-                                    <input type="text" class="form-control" name="PackageCostInfo.GroupPricing[${index}].PricePerPerson" placeholder="e.g., $2,500, $2,200" required>
-                                </div>
-                            </div>
-                            <div class="text-end">
-                                <button type="button" class="btn btn-outline-danger btn-sm remove-group-pricing">
-                                    <i class="fas fa-trash"></i> Remove Group Pricing
-                                </button>
-                            </div>
-                        `;
-            }
-
-            updateGroupPricingIndexes() {
-                const groupPricings = document.querySelectorAll('.group-pricing-item');
-                groupPricings.forEach((item, index) => {
-                    const header = item.querySelector('h6');
-                    header.textContent = `Group Pricing ${index + 1}`;
-                    const inputs = item.querySelectorAll('input');
-                    inputs.forEach(input => {
-                        if (input.name && input.name.includes('GroupPricing[')) {
-                            const fieldName = input.name.split('.').pop();
-                            input.name = `PackageCostInfo.GroupPricing[${index}].${fieldName}`;
+            setupItinerary() {
+                $('#addItinerary').on('click', () => {
+                    const $container = $('#itineraryContainer');
+                    const $newItinerary = $('<div>').addClass('itinerary-item').html(this.getItineraryTemplate(this.itineraryIndex));
+                    $container.append($newItinerary);
+                    tinymce.init({
+                        selector: `#trek-itinerary-editor-${this.itineraryIndex}`,
+                        height: 200,
+                        menubar: false,
+                        plugins: 'lists link',
+                        toolbar: 'bold italic underline | bullist numlist | link',
+                        branding: false,
+                        setup: (editor) => {
+                            editor.on('change', () => {
+                                editor.save();
+                            });
                         }
                     });
+                    this.itineraryIndex++;
+                    this.updateItineraryIndexes();
                 });
-                this.groupPricingIndex = groupPricings.length;
+                $(document).on('click', '.remove-itinerary', (e) => {
+                    const $itineraryItem = $(e.target).closest('.itinerary-item');
+                    const $textarea = $itineraryItem.find('textarea');
+                    if ($textarea.length) tinymce.get($textarea.attr('id'))?.remove();
+                    $itineraryItem.remove();
+                    this.updateItineraryIndexes();
+                });
             }
 
-            setupFAQs() {
-                document.getElementById('addFaq').addEventListener('click', () => {
-                    const container = document.getElementById('faqsContainer');
-                    const newFaq = document.createElement('div');
-                    newFaq.className = 'faq-item';
-                    newFaq.innerHTML = this.getFAQTemplate(this.faqIndex);
-                    container.appendChild(newFaq);
-                    try {
+            getItineraryTemplate(index) {
+                return `
+                        <input type="hidden" name="TrekItineraryDays[${index}].Id" value="0" />
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <h6 class="text-primary">Day ${index + 1}</h6>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label required">Day Number</label>
+                                <input type="number" class="form-control" name="TrekItineraryDays[${index}].DayNumber" value="${index + 1}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label required">Title</label>
+                                <input type="text" class="form-control" name="TrekItineraryDays[${index}].Title" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label required">Description</label>
+                            <textarea class="form-control trek-editor" id="trek-itinerary-editor-${index}" name="TrekItineraryDays[${index}].Description" rows="3" required></textarea>
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-outline-danger btn-sm remove-itinerary">
+                                <i class="fas fa-trash"></i> Remove Day
+                            </button>
+                        </div>
+                    `;
+            }
+
+            updateItineraryIndexes() {
+                const $itineraries = $('.itinerary-item');
+                $itineraries.each((index, item) => {
+                    $(item).find('h6').text(`Day ${index + 1}`);
+                    $(item).find('input, textarea').each((_, input) => {
+                        const fieldName = $(input).attr('name').split('.').pop();
+                        $(input).attr('name', `TrekItineraryDays[${index}].${fieldName}`);
+                        if (fieldName === 'DayNumber') $(input).val(index + 1);
+                    });
+                    const $textarea = $(item).find('textarea');
+                    if ($textarea.length) {
+                        $textarea.attr('id', `trek-itinerary-editor-${index}`);
+                        tinymce.get($textarea.attr('id'))?.remove();
                         tinymce.init({
-                            selector: `#trek-faq-editor-${this.faqIndex}`,
+                            selector: `#trek-itinerary-editor-${index}`,
                             height: 200,
                             menubar: false,
                             plugins: 'lists link',
                             toolbar: 'bold italic underline | bullist numlist | link',
+                            branding: false,
                             setup: (editor) => {
                                 editor.on('change', () => {
                                     editor.save();
                                 });
                             }
                         });
-                    } catch (e) {
-                        console.error('Error initializing TinyMCE for FAQ:', e);
-                        this.showAlert('Failed to initialize FAQ editor.', 'warning');
                     }
-                    this.faqIndex++;
-                    this.updateRemoveButtons('.faq-item', '.remove-faq');
                 });
+                this.itineraryIndex = $itineraries.length;
+            }
 
-                document.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('remove-faq') || e.target.closest('.remove-faq')) {
-                        const faqItem = e.target.closest('.faq-item');
-                        faqItem.remove();
-                        this.updateFAQIndexes();
-                        this.updateRemoveButtons('.faq-item', '.remove-faq');
-                    }
+            setupFAQs() {
+                $('#addFaq').on('click', () => {
+                    const $container = $('#faqsContainer');
+                    const $newFaq = $('<div>').addClass('faq-item').html(this.getFAQTemplate(this.faqIndex));
+                    $container.append($newFaq);
+                    tinymce.init({
+                        selector: `#trek-faq-editor-${this.faqIndex}`,
+                        height: 200,
+                        menubar: false,
+                        plugins: 'lists link',
+                        toolbar: 'bold italic underline | bullist numlist | link',
+                        branding: false,
+                        setup: (editor) => {
+                            editor.on('change', () => {
+                                editor.save();
+                            });
+                        }
+                    });
+                    this.faqIndex++;
+                    this.updateFAQIndexes();
+                });
+                $(document).on('click', '.remove-faq', (e) => {
+                    const $faqItem = $(e.target).closest('.faq-item');
+                    const $textarea = $faqItem.find('textarea');
+                    if ($textarea.length) tinymce.get($textarea.attr('id'))?.remove();
+                    $faqItem.remove();
+                    this.updateFAQIndexes();
                 });
             }
 
             getFAQTemplate(index) {
                 return `
-                            <div class="row">
-                                <div class="col-12 mb-3">
-                                    <h6 class="text-info">FAQ ${index + 1}</h6>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Category</label>
-                                    <select class="form-select" name="FAQs[${index}].Category">
-                                        <option value="">Select Category</option>
-                                        <option value="General">General</option>
-                                        <option value="Preparation">Preparation</option>
-                                        <option value="During Trek">During Trek</option>
-                                        <option value="Accommodation">Accommodation</option>
-                                        <option value="Food">Food</option>
-                                        <option value="Weather">Weather</option>
-                                        <option value="Equipment">Equipment</option>
-                                        <option value="Health & Safety">Health & Safety</option>
-                                        <option value="Permits">Permits</option>
-                                        <option value="Transportation">Transportation</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label required">Question</label>
-                                    <input type="text" class="form-control" name="FAQs[${index}].Question" placeholder="Enter frequently asked question" required>
-                                </div>
+                        <input type="hidden" name="FAQs[${index}].Id" value="0" />
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <h6 class="text-info">FAQ ${index + 1}</h6>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Answer</label>
-                                <textarea class="form-control" id="trek-faq-editor-${index}" name="FAQs[${index}].Answer" rows="4" placeholder="Provide detailed answer to the question..." required></textarea>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Category</label>
+                                <select class="form-select" name="FAQs[${index}].Category">
+                                    <option value="">Select Category</option>
+                                    <option value="General">General</option>
+                                    <option value="Preparation">Preparation</option>
+                                    <option value="During Trek">During Trek</option>
+                                    <option value="Accommodation">Accommodation</option>
+                                    <option value="Food">Food</option>
+                                    <option value="Weather">Weather</option>
+                                    <option value="Equipment">Equipment</option>
+                                    <option value="Health & Safety">Health & Safety</option>
+                                    <option value="Permits">Permits</option>
+                                    <option value="Transportation">Transportation</option>
+                                </select>
                             </div>
-                            <div class="text-end">
-                                <button type="button" class="btn btn-outline-danger btn-sm remove-faq">
-                                    <i class="fas fa-trash"></i> Remove FAQ
-                                </button>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label required">Question</label>
+                                <input type="text" class="form-control" name="FAQs[${index}].Question" required>
                             </div>
-                        `;
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label required">Answer</label>
+                            <textarea class="form-control faq-editor" id="trek-faq-editor-${index}" name="FAQs[${index}].Answer" rows="4" required></textarea>
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-outline-danger btn-sm remove-faq">
+                                <i class="fas fa-trash"></i> Remove FAQ
+                            </button>
+                        </div>
+                    `;
             }
 
-            setupItinerary() {
-                document.getElementById('addItinerary').addEventListener('click', () => {
-                    const container = document.getElementById('itineraryContainer');
-                    const newItinerary = document.createElement('div');
-                    newItinerary.className = 'itinerary-item';
-                    newItinerary.innerHTML = this.getItineraryTemplate(this.itineraryIndex, this.itineraryIndex + 1);
-                    container.appendChild(newItinerary);
-                    try {
+            updateFAQIndexes() {
+                const $faqs = $('.faq-item');
+                $faqs.each((index, item) => {
+                    $(item).find('h6').text(`FAQ ${index + 1}`);
+                    $(item).find('input, select, textarea').each((_, input) => {
+                        const fieldName = $(input).attr('name').split('.').pop();
+                        $(input).attr('name', `FAQs[${index}].${fieldName}`);
+                    });
+                    const $textarea = $(item).find('textarea');
+                    if ($textarea.length) {
+                        $textarea.attr('id', `trek-faq-editor-${index}`);
+                        tinymce.get($textarea.attr('id'))?.remove();
                         tinymce.init({
-                            selector: `#trek-itinerary-editor-${this.itineraryIndex}`,
+                            selector: `#trek-faq-editor-${index}`,
                             height: 200,
                             menubar: false,
                             plugins: 'lists link',
                             toolbar: 'bold italic underline | bullist numlist | link',
+                            branding: false,
                             setup: (editor) => {
                                 editor.on('change', () => {
                                     editor.save();
                                 });
                             }
                         });
-                    } catch (e) {
-                        console.error('Error initializing TinyMCE for itinerary:', e);
-                        this.showAlert('Failed to initialize itinerary editor.', 'warning');
                     }
-                    this.itineraryIndex++;
-                    this.updateRemoveButtons('.itinerary-item', '.remove-itinerary');
                 });
+                this.faqIndex = $faqs.length;
+            }
 
-                document.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('remove-itinerary') || e.target.closest('.remove-itinerary')) {
-                        const itineraryItem = e.target.closest('.itinerary-item');
-                        itineraryItem.remove();
-                        this.updateItineraryIndexes();
-                        this.updateRemoveButtons('.itinerary-item', '.remove-itinerary');
-                    }
+            setupGroupPricing() {
+                $('#addGroupPricing').on('click', () => {
+                    const $container = $('#groupPricingContainer');
+                    const $newGroupPricing = $('<div>').addClass('group-pricing-item').html(this.getGroupPricingTemplate(this.groupPricingIndex));
+                    $container.append($newGroupPricing);
+                    this.groupPricingIndex++;
+                    this.updateGroupPricingIndexes();
+                });
+                $(document).on('click', '.remove-group-pricing', (e) => {
+                    $(e.target).closest('.group-pricing-item').remove();
+                    this.updateGroupPricingIndexes();
                 });
             }
 
-            getItineraryTemplate(index, dayNumber) {
+            getGroupPricingTemplate(index) {
                 return `
-                            <div class="row">
-                                <div class="col-12 mb-3">
-                                    <h6 class="text-primary">Day ${dayNumber}</h6>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label required">Day Number</label>
-                                    <input type="number" class="form-control" name="TrekItineraryDays[${index}].DayNumber" value="${dayNumber}" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label required">Title</label>
-                                    <input type="text" class="form-control" name="TrekItineraryDays[${index}].Title" placeholder="e.g., Trek to Base Camp" required>
-                                </div>
+                        <input type="hidden" name="PackageCostInfo.GroupPricing[${index}].Id" value="0" />
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <h6 class="text-primary">Group Pricing ${index + 1}</h6>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label required">Description</label>
-                                <textarea class="form-control trek-editor" id="trek-itinerary-editor-${index}" name="TrekItineraryDays[${index}].Description" rows="3" placeholder="Detailed description of the day's activities and what to expect..."></textarea>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label required">Min Group Size</label>
+                                <input type="number" class="form-control" name="PackageCostInfo.GroupPricing[${index}].MinPeople" required min="1">
                             </div>
-                            <div class="text-end">
-                                <button type="button" class="btn btn-outline-danger btn-sm remove-itinerary">
-                                    <i class="fas fa-trash"></i> Remove Day
-                                </button>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label required">Max Group Size</label>
+                                <input type="number" class="form-control" name="PackageCostInfo.GroupPricing[${index}].MaxPeople" required min="1">
                             </div>
-                        `;
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label required">Price Per Person</label>
+                                <input type="number" step="0.01" class="form-control" name="PackageCostInfo.GroupPricing[${index}].PricePerPerson" required min="0">
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-outline-danger btn-sm remove-group-pricing">
+                                <i class="fas fa-trash"></i> Remove Group Pricing
+                            </button>
+                        </div>
+                    `;
             }
 
-            updateRemoveButtons(containerSelector, removeButtonSelector) {
-                const items = document.querySelectorAll(containerSelector);
-                items.forEach((item, index) => {
-                    const removeBtn = item.querySelector(removeButtonSelector);
-                    if (items.length > 1) {
-                        removeBtn.style.display = 'block';
-                    } else {
-                        removeBtn.style.display = 'none';
-                    }
-                });
-            }
-
-            updateItineraryIndexes() {
-                const itineraries = document.querySelectorAll('.itinerary-item');
-                itineraries.forEach((item, index) => {
-                    const dayNumber = index + 1;
-                    const dayHeader = item.querySelector('h6');
-                    dayHeader.textContent = `Day ${dayNumber}`;
-                    const inputs = item.querySelectorAll('input, textarea');
-                    inputs.forEach(input => {
-                        if (input.name && input.name.includes('TrekItineraryDays[')) {
-                            const fieldName = input.name.split('.')[1];
-                            input.name = `TrekItineraryDays[${index}].${fieldName}`;
-                            if (fieldName === 'DayNumber') {
-                                input.value = dayNumber;
-                            }
-                        }
+            updateGroupPricingIndexes() {
+                const $groupPricings = $('.group-pricing-item');
+                $groupPricings.each((index, item) => {
+                    $(item).find('h6').text(`Group Pricing ${index + 1}`);
+                    $(item).find('input').each((_, input) => {
+                        const fieldName = $(input).attr('name').split('.').pop();
+                        $(input).attr('name', `PackageCostInfo.GroupPricing[${index}].${fieldName}`);
                     });
-                    const textarea = item.querySelector('textarea');
-                    if (textarea) {
-                        textarea.id = `trek-itinerary-editor-${index}`;
-                        tinymce.get(textarea.id)?.remove();
-                        try {
-                            tinymce.init({
-                                selector: `#trek-itinerary-editor-${index}`,
-                                height: 200,
-                                menubar: false,
-                                plugins: 'lists link',
-                                toolbar: 'bold italic underline | bullist numlist | link',
-                                setup: (editor) => {
-                                    editor.on('change', () => {
-                                        editor.save();
-                                    });
-                                }
-                            });
-                        } catch (e) {
-                            console.error('Error re-initializing TinyMCE for itinerary:', e);
-                            this.showAlert('Failed to re-initialize itinerary editor.', 'warning');
-                        }
-                    }
                 });
-                this.itineraryIndex = itineraries.length;
+                this.groupPricingIndex = $groupPricings.length;
             }
 
-            updateFAQIndexes() {
-                const faqs = document.querySelectorAll('.faq-item');
-                faqs.forEach((item, index) => {
-                    const header = item.querySelector('h6');
-                    header.textContent = `FAQ ${index + 1}`;
-                    const inputs = item.querySelectorAll('input, select, textarea');
-                    inputs.forEach(input => {
-                        if (input.name && input.name.includes('FAQs[')) {
-                            const fieldName = input.name.split('.')[1];
-                            input.name = `FAQs[${index}].${fieldName}`;
-                        }
+            setupFixedPricing() {
+                $('#addFixedPricing').on('click', () => {
+                    const $container = $('#fixedPricingContainer');
+                    const $newFixedPricing = $('<div>').addClass('fixed-pricing-item').html(this.getFixedPricingTemplate(this.fixedPricingIndex));
+                    $container.append($newFixedPricing);
+                    this.fixedPricingIndex++;
+                    this.updateFixedPricingIndexes();
+                });
+                $(document).on('click', '.remove-fixed-pricing', (e) => {
+                    $(e.target).closest('.fixed-pricing-item').remove();
+                    this.updateFixedPricingIndexes();
+                });
+            }
+
+            getFixedPricingTemplate(index) {
+                return `
+                        <input type="hidden" name="TrekPackageFixedPricings[${index}].Id" value="0" />
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <h6 class="text-success">Fixed Pricing ${index + 1}</h6>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label required">From Date</label>
+                                <input type="date" class="form-control" name="TrekPackageFixedPricings[${index}].FromDate" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label required">To Date</label>
+                                <input type="date" class="form-control" name="TrekPackageFixedPricings[${index}].ToDate" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label required">Price Per Person</label>
+                                <input type="number" step="0.01" class="form-control" name="TrekPackageFixedPricings[${index}].PricePerPerson" required min="0">
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-outline-danger btn-sm remove-fixed-pricing">
+                                <i class="fas fa-trash"></i> Remove Fixed Pricing
+                            </button>
+                        </div>
+                    `;
+            }
+
+            updateFixedPricingIndexes() {
+                const $fixedPricings = $('.fixed-pricing-item');
+                $fixedPricings.each((index, item) => {
+                    $(item).find('h6').text(`Fixed Pricing ${index + 1}`);
+                    $(item).find('input').each((_, input) => {
+                        const fieldName = $(input).attr('name').split('.').pop();
+                        $(input).attr('name', `TrekPackageFixedPricings[${index}].${fieldName}`);
                     });
-                    const textarea = item.querySelector('textarea');
-                    if (textarea) {
-                        textarea.id = `trek-faq-editor-${index}`;
-                        tinymce.get(textarea.id)?.remove();
-                        try {
-                            tinymce.init({
-                                selector: `#trek-faq-editor-${index}`,
-                                height: 200,
-                                menubar: false,
-                                plugins: 'lists link',
-                                toolbar: 'bold italic underline | bullist numlist | link',
-                                setup: (editor) => {
-                                    editor.on('change', () => {
-                                        editor.save();
-                                    });
-                                }
-                            });
-                        } catch (e) {
-                            console.error('Error re-initializing TinyMCE for FAQ:', e);
-                            this.showAlert('Failed to re-initialize FAQ editor.', 'warning');
-                        }
-                    }
                 });
-                this.faqIndex = faqs.length;
-            }
-
-            setupEventListeners() {
-                document.getElementById('imageUploadZone').addEventListener('click', () => {
-                    document.getElementById('imageInput').click();
-                });
-
-                document.getElementById('addMoreImages').addEventListener('click', () => {
-                    document.getElementById('imageInput').click();
-                });
-
-                document.getElementById('imageInput').addEventListener('change', (e) => {
-                    this.handleImageSelection(e.target.files);
-                });
-
-                document.getElementById('nextStep').addEventListener('click', () => {
-                    this.nextStep();
-                });
-
-                document.getElementById('prevStep').addEventListener('click', () => {
-                    this.prevStep();
-                });
-
-                document.getElementById('trekPackageForm').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.submitForm();
-                });
+                this.fixedPricingIndex = $fixedPricings.length;
             }
 
             setupDragAndDrop() {
-                const uploadZone = document.getElementById('imageUploadZone');
-                uploadZone.addEventListener('dragover', (e) => {
+                const $uploadZone = $('#imageUploadZone');
+                $uploadZone.on('dragover', (e) => {
                     e.preventDefault();
-                    uploadZone.classList.add('dragover');
+                    $uploadZone.addClass('dragover');
                 });
-                uploadZone.addEventListener('dragleave', () => {
-                    uploadZone.classList.remove('dragover');
+                $uploadZone.on('dragleave', () => {
+                    $uploadZone.removeClass('dragover');
                 });
-                uploadZone.addEventListener('drop', (e) => {
+                $uploadZone.on('drop', (e) => {
                     e.preventDefault();
-                    uploadZone.classList.remove('dragover');
-                    this.handleImageSelection(e.dataTransfer.files);
+                    $uploadZone.removeClass('dragover');
+                    this.handleImageFiles(e.originalEvent.dataTransfer.files);
                 });
             }
 
-            handleImageSelection(files) {
+            handleImageFiles(files) {
                 Array.from(files).forEach(file => {
-                    if (file.type.startsWith('image/')) {
-                        const imageData = {
+                    if (file.type.startsWith('image/') && file.size <= 5 * 1024 * 1024) {
+                        this.selectedImages.push({
                             file: file,
                             id: Date.now() + Math.random(),
                             preview: URL.createObjectURL(file),
                             caption: '',
                             subCaption: '',
-                            isActive: true
-                        };
-                        this.selectedImages.push(imageData);
+                            imageType: 'TrekImage'
+                        });
                     }
                 });
-                this.displayImagePreviews();
-                this.updateImageDetails();
+                this.renderImagePreviews();
+                this.renderImageDetails();
             }
 
-            displayImagePreviews() {
-                const container = document.getElementById('imagePreviews');
-                container.innerHTML = '';
-                this.selectedImages.forEach((imageData, index) => {
-                    const previewDiv = document.createElement('div');
-                    previewDiv.className = 'image-preview';
-                    previewDiv.innerHTML = `
-                                <img src="${imageData.preview}" alt="Preview">
-                                <button type="button" class="remove-image" onclick="trekManager.removeImage(${index})">
+            renderImagePreviews() {
+                const $container = $('#imagePreviews');
+                $container.empty();
+
+                this.selectedImages.forEach((image, index) => {
+                    const $preview = $(`
+                            <div class="image-preview new-image" data-index="${index}">
+                                <img src="${image.preview}" alt="Preview" class="img-fluid rounded" style="max-width: 200px; max-height: 150px; object-fit: cover;">
+                                <button type="button" class="remove-image" data-index="${index}" style="position: absolute; top: -10px; right: -10px; background: #dc3545; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                                     <i class="fas fa-times"></i>
                                 </button>
                                 <div class="mt-2">
-                                    <small class="text-muted">${imageData.file.name}</small>
+                                    <small class="text-muted">${image.file.name}</small>
                                 </div>
-                            `;
-                    container.appendChild(previewDiv);
+                            </div>
+                        `);
+                    $container.append($preview);
                 });
             }
 
-            updateImageDetails() {
-                const container = document.getElementById('imageDetailsContainer');
-                if (this.selectedImages.length === 0) {
-                    container.innerHTML = '';
-                    return;
-                }
+            renderImageDetails() {
+                const $container = $('#imageDetailsContainer');
+                $container.empty();
 
-                container.innerHTML = '<hr><h6 class="mt-4 mb-3"><i class="fas fa-edit"></i> New Image Details</h6>';
-                this.selectedImages.forEach((imageData, index) => {
-                    const detailDiv = document.createElement('div');
-                    detailDiv.className = 'row mb-4 p-3 border rounded';
-                    detailDiv.innerHTML = `
-                                <div class="col-md-3">
-                                    <img src="${imageData.preview}" class="img-fluid rounded" style="max-height: 150px; object-fit: cover; width: 100%;">
-                                    <div class="mt-2">
-                                        <small class="text-muted">${imageData.file.name}</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <h6>Image ${index + 1} Details</h6>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label required">Caption</label>
-                                            <input type="text" class="form-control image-detail-input" data-index="${index}" data-field="caption" value="${imageData.caption}" placeholder="Enter image caption" required>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Sub Caption</label>
-                                            <input type="text" class="form-control image-detail-input" data-index="${index}" data-field="subCaption" value="${imageData.subCaption}" placeholder="Enter sub caption">
+                if (this.selectedImages.length > 0) {
+                    $container.append('<hr><h6 class="mt-4 mb-3"><i class="fas fa-edit"></i> New Image Details</h6>');
+
+                    this.selectedImages.forEach((image, index) => {
+                        const $detailDiv = $(`
+                                <div class="row mb-4 p-3 border rounded">
+                                    <div class="col-md-3">
+                                        <img src="${image.preview}" class="img-fluid rounded" style="max-height: 150px; object-fit: cover; width: 100%;">
+                                        <div class="mt-2">
+                                            <small class="text-muted">${image.file.name}</small>
                                         </div>
                                     </div>
+                                    <div class="col-md-9">
+                                        <h6>New Image ${index + 1} Details</h6>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label ">Image Type</label>
+                                                <select class="form-select new-image-detail" data-index="${index}" data-field="imageType" >
+                                                    <option value="TrekImage" ${image.imageType === 'TrekImage' ? 'selected' : ''}>Trek Image</option>
+                                                    <option value="MapImage" ${image.imageType === 'MapImage' ? 'selected' : ''}>Map Image</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label ">Caption</label>
+                                                <input type="text" class="form-control new-image-detail" data-index="${index}" data-field="caption" value="${image.caption}" placeholder="Enter image caption" >
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Sub Caption</label>
+                                                <input type="text" class="form-control new-image-detail" data-index="${index}" data-field="subCaption" value="${image.subCaption}" placeholder="Enter sub caption">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            `;
-                    container.appendChild(detailDiv);
-                });
-
-                document.querySelectorAll('.image-detail-input').forEach(input => {
-                    input.addEventListener('input', (e) => {
-                        const index = parseInt(e.target.dataset.index);
-                        const field = e.target.dataset.field;
-                        this.selectedImages[index][field] = e.target.value;
+                            `);
+                        $container.append($detailDiv);
                     });
-                });
-            }
 
-            removeImage(index) {
-                URL.revokeObjectURL(this.selectedImages[index].preview);
-                this.selectedImages.splice(index, 1);
-                this.displayImagePreviews();
-                this.updateImageDetails();
-            }
-
-            removeExistingImage(index) {
-                this.existingImages[index].isDeleted = true;
-                const preview = document.querySelector(`.existing-image[data-index="${index}"]`);
-                preview.style.display = 'none';
-                const deleteFlag = preview.querySelector('.delete-flag');
-                deleteFlag.value = this.existingImages[index].id;
-                deleteFlag.disabled = false;
+                    $('.new-image-detail').on('change', (e) => {
+                        const $target = $(e.target);
+                        const index = parseInt($target.data('index'));
+                        const field = $target.data('field');
+                        this.selectedImages[index][field] = $target.val();
+                    });
+                }
             }
 
             validateStep(step) {
-                const stepElement = document.getElementById(`step-${step}`);
-                const requiredInputs = stepElement.querySelectorAll('input[required], select[required], textarea[required]');
+                const $stepElement = $(`#step-${step}`);
+                const $requiredFields = $stepElement.find('[required]');
                 let isValid = true;
 
-                requiredInputs.forEach(input => {
-                    input.classList.remove('is-invalid');
-                    if (!input.value.trim()) {
-                        input.classList.add('is-invalid');
+                tinymce.triggerSave();
+
+                $requiredFields.each((_, field) => {
+                    if (!$(field).val().trim()) {
+                        $(field).addClass('is-invalid');
                         isValid = false;
+                    } else {
+                        $(field).removeClass('is-invalid');
                     }
                 });
 
-                if (!isValid) {
-                    this.showAlert('Please fill in all required fields.', 'warning');
+                if (step === 7) {
+                    $('.fixed-pricing-item').each((_, item) => {
+                        const $fromDate = $(item).find('input[name$=".FromDate"]');
+                        const $toDate = $(item).find('input[name$=".ToDate"]');
+                        if ($fromDate.val() && $toDate.val() && new Date($fromDate.val()) > new Date($toDate.val())) {
+                            $fromDate.addClass('is-invalid');
+                            $toDate.addClass('is-invalid');
+                            isValid = false;
+                            this.showAlert('From Date must be before To Date in Fixed Pricing.', 'danger');
+                        }
+                    });
+                    $('.group-pricing-item').each((_, item) => {
+                        const $minPeople = $(item).find('input[name$=".MinPeople"]');
+                        const $maxPeople = $(item).find('input[name$=".MaxPeople"]');
+                        if ($minPeople.val() && $maxPeople.val() && parseInt($minPeople.val()) > parseInt($maxPeople.val())) {
+                            $minPeople.addClass('is-invalid');
+                            $maxPeople.addClass('is-invalid');
+                            isValid = false;
+                            this.showAlert('Min Group Size must be less than or equal to Max Group Size.', 'danger');
+                        }
+                    });
+                }
+
+                if (step === 8) {
+                    const activeExisting = this.existingImages.filter(img => !img.isDeleted).length;
+                    const newImages = this.selectedImages.length;
+
+                    // if (activeExisting === 0 && newImages === 0) {
+                    //     this.showAlert('At least one image is required.', 'danger');
+                    //     isValid = false;
+                    // }
+
+                    // Validate new image details
+                    // for (let img of this.selectedImages) {
+                    //     if (!img.caption || !img.imageType) {
+                    //         this.showAlert('Please fill in all required fields for new images.', 'danger');
+                    //         isValid = false;
+                    //         break;
+                    //     }
+                    // }
+
+                    // Validate existing image details
+                    // for (let img of this.existingImages) {
+                    //     if (!img.isDeleted && (!img.caption || !img.imageType)) {
+                    //         this.showAlert('Please fill in all required fields for existing images.', 'danger');
+                    //         isValid = false;
+                    //         break;
+                    //     }
+                    // }
+                }
+
+                if (!isValid && step !== 8) {
+                    this.showAlert('Please fill in all required fields correctly.', 'danger');
                 }
 
                 return isValid;
             }
 
-            nextStep() {
+            showNextStep() {
                 if (this.validateStep(this.currentStep)) {
                     if (this.currentStep < this.totalSteps) {
-                        this.showStep(this.currentStep + 1);
+                        this.currentStep++;
+                        this.updateStepUI();
                     }
                 }
             }
 
-            prevStep() {
+            showPrevStep() {
                 if (this.currentStep > 1) {
-                    this.showStep(this.currentStep - 1);
+                    this.currentStep--;
+                    this.updateStepUI();
                 }
             }
 
-            showStep(step) {
-                document.querySelectorAll('.form-step').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.step').forEach(el => {
-                    el.classList.remove('active');
-                    if (parseInt(el.dataset.step) < step) {
-                        el.classList.add('completed');
-                    } else {
-                        el.classList.remove('completed');
+            updateStepUI() {
+                $('.form-step').hide();
+                $(`#step-${this.currentStep}`).show();
+
+                $('.step').each((_, step) => {
+                    const stepNum = parseInt($(step).attr('data-step'));
+                    $(step).removeClass('active completed');
+                    if (stepNum === this.currentStep) {
+                        $(step).addClass('active');
+                    } else if (stepNum < this.currentStep) {
+                        $(step).addClass('completed');
                     }
                 });
 
-                document.getElementById(`step-${step}`).style.display = 'block';
-                document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+                $('#prevStep').toggle(this.currentStep > 1);
+                $('#nextStep').toggle(this.currentStep < this.totalSteps);
+                $('#submitBtn').toggle(this.currentStep === this.totalSteps);
 
-                this.currentStep = step;
-
-                document.getElementById('prevStep').style.display = step > 1 ? 'block' : 'none';
-                document.getElementById('nextStep').style.display = step < this.totalSteps ? 'block' : 'none';
-                document.getElementById('submitBtn').style.display = step === this.totalSteps ? 'block' : 'none';
-
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                $('html, body').animate({ scrollTop: 0 }, 'smooth');
             }
 
             showAlert(message, type = 'danger') {
-                const alertDiv = document.createElement('div');
-                alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
-                alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 400px;';
-                alertDiv.innerHTML = `
-                            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'exclamation-circle'}"></i>
-                            ${message}
+                const $alert = $(`
+                        <div class="alert alert-${type} alert-dismissible fade show" style="position: fixed; top: 20px; right: 20px; z-index: 9999; max-width: 400px;">
+                            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        `;
-                document.body.appendChild(alertDiv);
-                setTimeout(() => {
-                    if (alertDiv.parentNode) {
-                        alertDiv.parentNode.removeChild(alertDiv);
-                    }
-                }, 5000);
+                        </div>
+                    `);
+                $('#alertContainer').append($alert);
+                setTimeout(() => $alert.remove(), 5000);
             }
 
-            showLoading(show = true) {
-                document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
-            }
+            handleSubmit(e) {
+                e.preventDefault();
 
-            async submitForm() {
                 if (!this.validateStep(this.currentStep)) {
                     return;
                 }
 
+                this.showLoading(true);
+
                 try {
-                    this.showLoading(true);
-                    this.createImageFormFields();
-                    document.getElementById('trekPackageForm').submit();
+                    tinymce.triggerSave();
+                    this.updateItineraryIndexes();
+                    this.updateFAQIndexes();
+                    this.updateGroupPricingIndexes();
+                    this.updateFixedPricingIndexes();
+
+                    const $form = $('#trekPackageForm');
+                    const formData = new FormData($form[0]);
+
+                    // Clear any existing image-related fields
+                    for (let key of Array.from(formData.keys())) {
+                        if (key.startsWith('TrekPackageImages[') || key.startsWith('Images[') || key.startsWith('DeleteImageIds')) {
+                            formData.delete(key);
+                        }
+                    }
+
+                    let imageIndex = 0;
+                    
+                    // Add existing images (not deleted)
+                    console.log('Processing existing images...');
+                    this.existingImages.forEach((img) => {
+                        if (!img.isDeleted) {
+                            console.log(`Adding existing image ${imageIndex}:`, img);
+                            formData.append(`TrekPackageImages[${imageIndex}].Id`, img.id);
+                            formData.append(`TrekPackageImages[${imageIndex}].Image`, img.imagePath || '');
+                            formData.append(`TrekPackageImages[${imageIndex}].Caption`, img.caption || '');
+                            formData.append(`TrekPackageImages[${imageIndex}].SubCaption`, img.subCaption || '');
+                            formData.append(`TrekPackageImages[${imageIndex}].ImageType`, img.imageType || 'TrekImage');
+                            imageIndex++;
+                        }
+                    });
+
+                    console.log(`Total existing images added: ${imageIndex}`);
+
+                    // Add new images
+                    console.log('Processing new images...');
+                    let newImageStartIndex = imageIndex;
+                    this.selectedImages.forEach((image, idx) => {
+                        console.log(`Adding new image ${imageIndex}:`, {
+                            caption: image.caption,
+                            subCaption: image.subCaption,
+                            imageType: image.imageType,
+                            fileName: image.file.name
+                        });
+
+                        formData.append(`Images[${idx}].ImageFile`, image.file);
+                        formData.append(`Images[${idx}].Caption`, image.caption || '');
+                        formData.append(`Images[${idx}].SubCaption`, image.subCaption || '');
+                        formData.append(`Images[${idx}].ImageType`, image.imageType || 'TrekImage');
+                        formData.append(`Images[${idx}].IsActive`, 'true');
+                        imageIndex++;
+                    });
+
+                    console.log(`Total new images added: ${imageIndex - newImageStartIndex}`);
+                    console.log(`Total images (existing + new): ${imageIndex}`);
+
+                    // Add deleted image IDs
+                    console.log('Processing deleted images...');
+                    this.deletedImageIds.forEach((id, idx) => {
+                        console.log(`Marking image for deletion: ${id}`);
+                        formData.append(`DeleteImageIds[${idx}]`, id);
+                    });
+
+                    console.log(`Total deleted images: ${this.deletedImageIds.length}`);
+
+                    // Debug: Log all form data
+                    console.log('=== COMPLETE FORM DATA ===');
+                    for (let pair of formData.entries()) {
+                        if (pair[1] instanceof File) {
+                            console.log(pair[0], `[File: ${pair[1].name}]`);
+                        } else {
+                            console.log(pair[0], pair[1]);
+                        }
+                    }
+                    console.log('==========================');
+
+                    $.ajax({
+                        url: '/TrekPackage/Edit',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: (response) => {
+                            console.log('Form submission successful:', response);
+                            this.showAlert('Trek package updated successfully!', 'success');
+                            this.showLoading(false);
+                            setTimeout(() => {
+                                window.location.href = '/TrekPackage/Index';
+                            }, 1500);
+                        },
+                        error: (xhr, status, error) => {
+                            console.error('Form submission failed:', {
+                                status: status,
+                                error: error,
+                                responseText: xhr.responseText,
+                                statusCode: xhr.status
+                            });
+                            this.showAlert('Failed to update trek package. Please check console for details.', 'danger');
+                            this.showLoading(false);
+                        }
+                    });
                 } catch (error) {
+                    console.error('Error during form submission:', error);
+                    this.showAlert('An error occurred while submitting the form. Please try again.', 'danger');
                     this.showLoading(false);
-                    this.showAlert('Error updating trek package. Please try again.', 'danger');
-                    console.error('Submission error:', error);
                 }
             }
 
-            createImageFormFields() {
-                document.querySelectorAll('input[name^="Image["]').forEach(el => el.remove());
-
-                const form = document.getElementById('trekPackageForm');
-                this.selectedImages.forEach((imageData, index) => {
-                    const fileInput = document.createElement('input');
-                    fileInput.type = 'file';
-                    fileInput.name = `Image[${index}].ImageFiles`;
-                    fileInput.style.display = 'none';
-                    const dataTransfer = new DataTransfer();
-                    dataTransfer.items.add(imageData.file);
-                    fileInput.files = dataTransfer.files;
-
-                    const captionInput = document.createElement('input');
-                    captionInput.type = 'hidden';
-                    captionInput.name = `Image[${index}].Caption`;
-                    captionInput.value = imageData.caption || '';
-
-                    const subCaptionInput = document.createElement('input');
-                    subCaptionInput.type = 'hidden';
-                    subCaptionInput.name = `Image[${index}].SubCaption`;
-                    subCaptionInput.value = imageData.subCaption || '';
-
-                    const isActiveInput = document.createElement('input');
-                    isActiveInput.type = 'hidden';
-                    isActiveInput.name = `Image[${index}].IsActive`;
-                    isActiveInput.value = 'true';
-
-                    form.appendChild(fileInput);
-                    form.appendChild(captionInput);
-                    form.appendChild(subCaptionInput);
-                    form.appendChild(isActiveInput);
-                });
+            showLoading(show = true) {
+                $('#loadingOverlay').css('display', show ? 'flex' : 'none');
             }
         }
 
-        try {
-            const trekManager = new TrekPackageManager();
-        } catch (e) {
-            console.error('Error initializing TrekPackageManager:', e);
-            document.body.insertAdjacentHTML('beforeend', `
-                        <div class="alert alert-danger alert-dismissible fade show position-fixed" style="top: 20px; right: 20px; z-index: 9999; max-width: 400px;">
+        $(document).ready(function () {
+            try {
+                const trekPackageManager = new TrekPackageManager();
+                console.log('TrekPackageManager initialized successfully');
+                console.log('Initial state:', {
+                    existingImages: trekPackageManager.existingImages.length,
+                    newImages: trekPackageManager.selectedImages.length,
+                    deletedImages: trekPackageManager.deletedImageIds.length
+                });
+            } catch (e) {
+                console.error('Error initializing TrekPackageManager:', e);
+                $('#alertContainer').html(`
+                        <div class="alert alert-danger alert-dismissible fade show" style="position: fixed; top: 20px; right: 20px; z-index: 9999; max-width: 400px;">
                             <i class="fas fa-exclamation-circle"></i> Failed to initialize the form. Please refresh the page.
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     `);
-        }
+            }
+        });
     </script>
+
+
 </body>
 </html>
-```
