@@ -36,6 +36,7 @@ builder.Services.AddScoped<IFileService, dataFileService>();
 builder.Services.AddScoped<IDealService, DealService>();
 builder.Services.AddScoped<IPageContentService, PageContentService>();
 builder.Services.AddScoped<ITrekAppService, TrekAppService>();
+builder.Services.AddScoped<IBlogService, BlogService>();
 //builder.Services.AddScoped<Ifile, FileUploadService>();
 var app = builder.Build();
 

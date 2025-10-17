@@ -1,0 +1,260 @@
+﻿@model UserRoles.Models.Blog.Blog
+@{
+    ViewData["Title"] = "Create Blog";
+    Layout = "_Layout"; // remove if you don't use a layout
+}
+
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+
+<style>
+    .container {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        max-width: 900px;
+        width: 100%;
+        padding: 40px;
+        animation: slideUp 0.5s ease-out;
+        margin: 20px auto;
+    }
+
+    keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    h2 {
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 2rem;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .alert {
+        padding: 15px 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        animation: fadeIn 0.3s ease;
+    }
+
+    keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: #333;
+        font-size: 1rem;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: inherit;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    }
+
+    #blogContent {
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        transition: border-color 0.3s ease;
+    }
+
+    #blogContent:focus-within {
+        border-color: #667eea;
+    }
+
+    .ql-toolbar {
+        border: none !important;
+        border-bottom: 2px solid #f0f0f0 !important;
+        border-radius: 8px 8px 0 0 !important;
+        background: #f9f9f9;
+        padding: 12px !important;
+    }
+
+    .ql-container {
+        border: none !important;
+        border-radius: 0 0 8px 8px !important;
+        font-size: 1rem;
+    }
+
+    .ql-editor {
+        min-height: 350px;
+        padding: 15px !important;
+    }
+
+    .text-danger {
+        color: #dc3545;
+        font-size: 0.875rem;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .button-group {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    button[type="submit"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 12px 40px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    button[type="submit"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+
+    button[type="submit"]:active {
+        transform: translateY(0);
+    }
+
+    media (max-width: 768px) {
+        .container {
+            padding: 25px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            padding: 10px 12px;
+            font-size: 16px;
+        }
+
+        .ql-editor {
+            min-height: 250px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 14px 20px;
+        }
+    }
+
+    media (max-width: 480px) {
+        h2 {
+            font-size: 1.3rem;
+        }
+
+        .ql-editor {
+            min-height: 200px;
+        }
+    }
+</style>
+
+<div class="container">
+    <h2>✍️ Create Blog Post</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <form id="blogForm" asp-action="Create" asp-controller="Blog" method="post">
+        <div class="form-group mb-3">
+            <label asp-for="Title" class="form-label">Blog Title</label>
+            <input asp-for="Title" class="form-control" placeholder="Enter title" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Content" class="form-label">Content</label>
+            <div id="blogContent"></div>
+            <textarea asp-for="Content" id="Content" hidden></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+
+        <div class="text-center">
+            <button type="button" id="submitBtn" class="btn btn-primary">Publish Post 📝</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Initialize Quill
+        const quill = new Quill('#blogContent', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'header': [1, 2, 3, false] }],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'align': [] }],
+                    ['blockquote', 'code-block'],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                    ['link', 'image', 'video'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Handle custom submit
+        document.getElementById("submitBtn").addEventListener("click", function () {
+            const html = quill.root.innerHTML.trim();
+            document.getElementById("Content").value = html;
+
+            // Optional validation: make sure title & content are not empty
+            const title = document.querySelector('input[name="Title"]').value.trim();
+            if (title === "" || html === "<p><br></p>" || html === "") {
+                alert("Please enter both title and content.");
+                return;
+            }
+
+            document.getElementById("blogForm").submit();
+        });
+    });
+</script>
+
+<partial name="_ValidationScriptsPartial" />

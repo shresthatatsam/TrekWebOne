@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UserRoles.configuration;
 using UserRoles.Models;
+using UserRoles.Models.Blog;
+using UserRoles.Models.Contact;
 using UserRoles.Models.Trek;
 
 namespace UserRoles.Data
@@ -27,6 +29,8 @@ namespace UserRoles.Data
         public DbSet<TrekPackageCostInfo> TrekPackageCostInfos { get; set; }
         public DbSet<TrekPackageGroupPricing> TrekPackageGroupPricings { get; set; }
         public DbSet<TrekFAQ> TrekFAQs { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
         public DbSet<TrekItineraryDay> TrekItineraryDays { get; set; }
         public DbSet<TrekPackageFixedPricing> TrekPackageFixedPricings { get; set; }
 

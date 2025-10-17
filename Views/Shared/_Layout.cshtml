@@ -91,6 +91,27 @@
 								</ul>
 
 							</li>
+
+
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="Blog" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Blog
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="Blog">
+									<li>
+										<a class="dropdown-item" asp-controller="Blog" asp-action="Create">
+											Blog Create
+										</a>
+									</li>
+
+									<li>
+										<a class="dropdown-item" asp-controller="Blog" asp-action="Index">
+											View Blog
+										</a>
+									</li>
+								</ul>
+
+							</li>
 						}
 						@if (!User.IsInRole("Admin"))
 						{

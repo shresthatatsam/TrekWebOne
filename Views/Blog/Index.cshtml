@@ -1,0 +1,94 @@
+﻿@model IEnumerable<UserRoles.Models.Blog.Blog>
+@{
+    ViewData["Title"] = "Blog List";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>📰 Blog Posts</h2>
+        @* Show button only for admins *@
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Create" asp-controller="Blog" class="btn btn-primary">+ New Blog</a>
+        }
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row">
+            @foreach (var item in Model.OrderByDescending(x => x.CreatedAt))
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm border-0 h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="text-muted mb-2" style="font-size: 0.85rem;">
+                                📅 @item.CreatedAt.ToLocalTime().ToString("MMMM dd, yyyy")
+                            </p>
+                            <hr />
+                            <div class="blog-preview flex-grow-1">
+                                <div class="preview-text">
+                                    @Html.Raw(item.Content)
+                                </div>
+                                <a asp-action="Details" asp-controller="Blog" asp-route-id="@item.Id" class="read-more">Read More</a>
+                            </div>
+
+                            @* //<a asp-action="Details" asp-controller="Blog" asp-route-id="@item.Id" class="btn btn-sm btn-primary mt-3">View</a> *@
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">No blog posts found. Click “+ New Blog” to add your first post.</div>
+    }
+</div>
+
+<style>
+
+    .preview-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* show only 3 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .read-more {
+        display: inline-block;
+        margin-top: 5px;
+        font-size: 0.9rem;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+    .blog-preview p {
+        margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+</style>

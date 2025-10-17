@@ -1,0 +1,35 @@
+﻿@model UserRoles.Models.Blog.Blog
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-4">
+    <a asp-action="Index" class="btn btn-secondary mb-3">← Back to Blog List</a>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <h2 class="card-title">@Model.Title</h2>
+            <p class="text-muted mb-3">
+                📅 @Model.CreatedAt.ToLocalTime().ToString("MMMM dd, yyyy - hh:mm tt")
+            </p>
+            <hr />
+            <div class="blog-content">
+                @Html.Raw(Model.Content)
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .blog-content p {
+        margin-bottom: 1rem;
+    }
+
+    .blog-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
