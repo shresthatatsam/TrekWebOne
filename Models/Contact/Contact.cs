@@ -17,5 +17,8 @@ namespace UserRoles.Models.Contact
         public string Message { get; set; }
 		[NotMapped]
 		public string? Type { get; set; }
+
+		public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public bool IsActive { get; set; } = true;
 	}
 }

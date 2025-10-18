@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/UserRoles.styles.css" asp-append-version="true" />
 
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 	<header>
@@ -109,6 +110,36 @@
 											View Blog
 										</a>
 									</li>
+								</ul>
+
+							</li>
+
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="Contact" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Contact
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="Contact">
+									<li>
+										<a class="dropdown-item" asp-controller="Contact" asp-action="Details">
+											Contact Details
+										</a>
+									</li>
+
+								</ul>
+
+							</li>
+
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="Team" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Team Members
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="Team">
+									<li>
+										<a class="dropdown-item" asp-controller="Team" asp-action="Create">
+											Team Create
+										</a>
+									</li>
+
 								</ul>
 
 							</li>

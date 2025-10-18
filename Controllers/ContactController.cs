@@ -37,5 +37,44 @@ namespace UserRoles.Controllers
 			else
 				return RedirectToAction("Index");
 		}
+
+		[HttpGet]
+		public IActionResult Details(string status = "active")
+		{
+			IQueryable<Contact> query = _context.Contacts;
+
+			switch (status.ToLower())
+			{
+				case "active":
+					query = query.Where(x => x.IsActive);
+					break;
+				case "inactive":
+					query = query.Where(x => !x.IsActive);
+					break;
+				case "all":
+				default:
+					// No filter, show all
+					break;
+			}
+
+			ViewBag.SelectedStatus = status;
+			var data = query.OrderByDescending(x => x.Id).ToList();
+			return View(data);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> ToggleActive(int id)
+		{
+			var contact = await _context.Contacts.FindAsync(id);
+			if (contact == null)
+				return NotFound();
+
+			contact.IsActive = !contact.IsActive;
+			_context.Update(contact);
+			await _context.SaveChangesAsync();
+
+			TempData["Success"] = "Status updated successfully.";
+			return RedirectToAction(nameof(Details));
+		}
 	}
 }

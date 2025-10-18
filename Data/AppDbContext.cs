@@ -6,6 +6,7 @@ using UserRoles.configuration;
 using UserRoles.Models;
 using UserRoles.Models.Blog;
 using UserRoles.Models.Contact;
+using UserRoles.Models.Team;
 using UserRoles.Models.Trek;
 
 namespace UserRoles.Data

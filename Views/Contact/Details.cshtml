@@ -1,0 +1,63 @@
+﻿@model IEnumerable<UserRoles.Models.Contact.Contact>
+@{
+    var selected = ViewBag.SelectedStatus as string ?? "active";
+}
+
+<h2>Contact List</h2>
+
+<!-- ✅ Filter Buttons -->
+<div class="mb-3">
+    <a asp-action="Details" asp-route-status="active"
+       class="btn @(selected == "active" ? "btn-primary" : "btn-outline-primary")">
+        Active
+    </a>
+    <a asp-action="Details" asp-route-status="inactive"
+       class="btn @(selected == "inactive" ? "btn-primary" : "btn-outline-primary")">
+        Inactive
+    </a>
+    <a asp-action="Details" asp-route-status="all"
+       class="btn @(selected == "all" ? "btn-primary" : "btn-outline-primary")">
+        All
+    </a>
+</div>
+
+<!-- ✅ Table -->
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.Message</td>
+                <td>
+                    @if (item.IsActive)
+                    {
+                        <span class="badge bg-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Inactive</span>
+                    }
+                </td>
+                <td>
+                    <form asp-action="ToggleActive" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-sm btn-warning">
+                            Toggle
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
