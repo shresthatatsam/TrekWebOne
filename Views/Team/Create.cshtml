@@ -1,46 +1,76 @@
 ﻿@model UserRoles.Models.Team.TeamMember
 
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white rounded-top-4">
+            <h4 class="mb-0">Add Team Member</h4>
+        </div>
 
-<form asp-action="Create" method="post" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label class="form-label">Full Name</label>
-        <input asp-for="FullName" class="form-control" required />
+        <div class="card-body p-4">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <!-- Full Name -->
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="FullName" class="form-label fw-semibold">Full Name <span class="text-danger">*</span></label>
+                        <input asp-for="FullName" class="form-control shadow-sm" placeholder="Enter full name" required />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+
+                    <!-- Position -->
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Position" class="form-label fw-semibold">Position <span class="text-danger">*</span></label>
+                        <input asp-for="Position" class="form-control shadow-sm" placeholder="Enter position" required />
+                        <span asp-validation-for="Position" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Image Upload -->
+                <div class="mb-4">
+                    <label asp-for="ImageFile" class="form-label fw-semibold">Profile Image</label>
+                    <div class="d-flex align-items-center gap-3">
+                        <input asp-for="ImageFile" type="file" class="form-control shadow-sm" accept="image/*" />
+                        @if (Model?.ImageUrl != null)
+                        {
+                            <img src="@Model.ImageUrl" class="rounded-3 border shadow-sm" style="height: 100px; width: 100px; object-fit: cover;" />
+                        }
+                    </div>
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+
+                <!-- Social Links -->
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="FacebookUrl" class="form-label fw-semibold">Facebook</label>
+                        <input asp-for="FacebookUrl" class="form-control shadow-sm" placeholder="https://facebook.com/username" />
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="TwitterUrl" class="form-label fw-semibold">Twitter</label>
+                        <input asp-for="TwitterUrl" class="form-control shadow-sm" placeholder="https://twitter.com/username" />
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="LinkedInUrl" class="form-label fw-semibold">LinkedIn</label>
+                        <input asp-for="LinkedInUrl" class="form-control shadow-sm" placeholder="https://linkedin.com/in/username" />
+                    </div>
+                </div>
+
+                <!-- Active Checkbox -->
+                <div class="form-check form-switch mb-4">
+                    <input asp-for="IsActive" class="form-check-input" type="checkbox" role="switch" id="isActiveSwitch" />
+                    <label asp-for="IsActive" class="form-check-label fw-semibold">Active</label>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-end gap-2">
+                    <a asp-action="Index" class="btn btn-secondary px-4">Cancel</a>
+                    <button type="submit" class="btn btn-primary px-4">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 
-    <div class="mb-3">
-        <label class="form-label">Position</label>
-        <input asp-for="Position" class="form-control" required />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Upload Image</label>
-        <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
-        @if (Model?.ImageUrl != null)
-        {
-            <img src="@Model.ImageUrl" class="img-thumbnail mt-2" style="height:100px;" />
-        }
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Facebook</label>
-        <input asp-for="FacebookUrl" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Twitter</label>
-        <input asp-for="TwitterUrl" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">LinkedIn</label>
-        <input asp-for="LinkedInUrl" class="form-control" />
-    </div>
-
-    <div class="form-check mb-3">
-        <input asp-for="IsActive" class="form-check-input" />
-        <label asp-for="IsActive" class="form-check-label"></label>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

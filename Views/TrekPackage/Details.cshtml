@@ -342,7 +342,9 @@
 	<section class="trek-hero-slideshow position-relative">
 		@if (Model.TrekPackageImages?.Any() == true)
 		{
-			var heroImages = Model.TrekPackageImages.ToList();
+			var heroImages = Model.TrekPackageImages
+			.Where(i => i.ImageType == "TrekImage")
+			.ToList();
 
 			@for (int i = 0; i < heroImages.Count; i++)
 			{
@@ -369,6 +371,65 @@
 		</div>
 	</div>
 
+	<!-- Availability Modal -->
+	<div class="modal fade" id="availabilityModal" tabindex="-1" aria-labelledby="availabilityModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content shadow-lg">
+				<div class="modal-header bg-success text-white">
+					<h5 class="modal-title" id="availabilityModalLabel">
+						<i class="fas fa-calendar-check me-2"></i> Trek Package Fixed Pricing
+					</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					@if (Model.trekPackageFixedPricings != null && Model.trekPackageFixedPricings.Any())
+					{
+						<div class="table-responsive">
+							<table class="table table-bordered align-middle text-center">
+								<thead class="table-success">
+									<tr>
+										<th>From Date</th>
+										<th>To Date</th>
+										<th>Price Per Person</th>
+										<th>Book Now</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var pricing in Model.trekPackageFixedPricings)
+									{
+										<tr>
+											<td>@pricing.FromDate.ToString("MMM dd, yyyy")</td>
+											<td>@pricing.ToDate.ToString("MMM dd, yyyy")</td>
+											<td>@pricing.PricePerPerson</td>
+											<td>
+												<a asp-controller="TrekPackage"
+											   asp-action="FixedBooking"
+											   asp-route-id="@pricing.Id"
+											   class="btn btn-success text-white">
+												<i class="fas fa-hiking me-1"></i> Book Now
+											</a>
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					}
+					else
+					{
+						<div class="alert alert-info text-center">
+							No fixed pricing available for this trek.
+						</div>
+					}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+						Close
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -495,9 +556,14 @@
 													<i class="fas fa-hiking me-1"></i> Book Now
 												</a>
 
-												<button class="btn btn-outline-success">
+												<button class="btn btn-outline-success"
+														data-bs-toggle="modal"
+														data-bs-target="#availabilityModal">
 													<i class="fas fa-calendar-alt me-1"></i> Check Availability
 												</button>
+
+
+
 
 												<button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#contactModal">
 													<i class="fas fa-envelope-open-text me-1"></i> Request Custom Quote
@@ -610,7 +676,6 @@
 
 
 				<!-- FAQ Tab -->
-				<!-- FAQ Tab -->
 				<div id="faq" class="tab-content" style="display: none;">
 					<div class="container py-3">
 						@if (Model.FAQs?.Any() == true)
@@ -672,6 +737,17 @@
 			</div>
 		</div>
 	</section>
+
+	<section class="container">
+		<h3>Trek Map</h3>
+		<div class="col-lg-12 p-3">
+			@foreach (var image in Model.TrekPackageImages.Where(i => i.ImageType == "MapImage"))
+			{
+				<img src="@image.Image" class="img-fluid rounded shadow mb-2" />
+			}
+		</div>
+	</section>
+
 
 
 

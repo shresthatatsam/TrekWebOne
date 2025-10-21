@@ -16,6 +16,34 @@ namespace UserRoles.Controllers
             _env = env;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult GetPaged(int page = 1, int pageSize = 10)
+        {
+            var skip = (page - 1) * pageSize;
+
+            var teamMembers = _context.TeamMembers
+                .Where(t => t.IsActive)
+                .OrderBy(t => t.FullName)
+                .Skip(skip)
+                .Take(pageSize)
+                .Select(t => new
+                {
+                    fullName = t.FullName,
+                    position = t.Position,
+                    imageUrl = t.ImageUrl,
+                    facebookUrl = t.FacebookUrl,
+                    twitterUrl = t.TwitterUrl,
+                    linkedInUrl = t.LinkedInUrl
+                })
+                .ToList();
+
+            return Json(teamMembers);
+        }
+
         public IActionResult Create() => View();
 
         [HttpPost]

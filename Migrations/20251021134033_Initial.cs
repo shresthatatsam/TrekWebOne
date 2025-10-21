@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace UserRoles.Migrations
 {
     /// <inheritdoc />
-    public partial class TrekPackageFixedPricing : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -68,6 +68,22 @@ namespace UserRoles.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Blogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blogs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CarousalImages",
                 columns: table => new
                 {
@@ -81,6 +97,24 @@ namespace UserRoles.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CarousalImages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contacts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -143,11 +177,15 @@ namespace UserRoles.Migrations
                 name: "TeamMembers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FacebookUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TwitterUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LinkedInUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -177,6 +215,7 @@ namespace UserRoles.Migrations
                     TrekingPackageExclusion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TrekingPackageInclusion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TrekHighlight = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TrekVideoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -383,6 +422,28 @@ namespace UserRoles.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TrekPackageFixedPricings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PricePerPerson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TrekPackageId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TrekPackageFixedPricings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TrekPackageFixedPricings_TrekPackages_TrekPackageId",
+                        column: x => x.TrekPackageId,
+                        principalTable: "TrekPackages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TrekPackageImages",
                 columns: table => new
                 {
@@ -391,6 +452,7 @@ namespace UserRoles.Migrations
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Caption = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubCaption = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TrekPackageId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -489,6 +551,11 @@ namespace UserRoles.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_TrekPackageFixedPricings_TrekPackageId",
+                table: "TrekPackageFixedPricings",
+                column: "TrekPackageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TrekPackageGroupPricings_TrekPackageCostInfoId",
                 table: "TrekPackageGroupPricings",
                 column: "TrekPackageCostInfoId");
@@ -521,7 +588,13 @@ namespace UserRoles.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Blogs");
+
+            migrationBuilder.DropTable(
                 name: "CarousalImages");
+
+            migrationBuilder.DropTable(
+                name: "Contacts");
 
             migrationBuilder.DropTable(
                 name: "Deals");
@@ -540,6 +613,9 @@ namespace UserRoles.Migrations
 
             migrationBuilder.DropTable(
                 name: "TrekItineraryDays");
+
+            migrationBuilder.DropTable(
+                name: "TrekPackageFixedPricings");
 
             migrationBuilder.DropTable(
                 name: "TrekPackageGroupPricings");

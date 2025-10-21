@@ -28,8 +28,14 @@ public class TrekAppService : ITrekAppService
         return await query.AnyAsync();
     }
 
+    public async Task<TrekPackageFixedPricing> GetFixedTrekPricing(int id)
+    {
+		var query = _context.TrekPackageFixedPricings.Where(x => x.Id == id).AsQueryable();
+		var trekPackage = await query.FirstOrDefaultAsync();
+		return trekPackage;
+	}
 
-    public async Task<TrekPackage> GetTrekPackageBySlugAsync(string slug, bool includeFaqs = false,
+		public async Task<TrekPackage> GetTrekPackageBySlugAsync(string slug, bool includeFaqs = false,
         bool includeImages = false, bool includeItinerary = true, bool includeCostInfo = true)
     {
         var query = _context.TrekPackages.Where(x => x.Slug == slug).AsQueryable();

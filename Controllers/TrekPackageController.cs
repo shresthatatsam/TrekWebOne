@@ -158,9 +158,32 @@ namespace UserRoles.Controllers
             return View();
         }
 
+		public async Task<IActionResult> FixedBooking(int id)
+		{
+			var trekPackage = await _trekPackageService.GetFixedTrekPricing(id);
+
+			if (trekPackage == null)
+			{
+				return NotFound();
+			}
+
+			ViewBag.FromDate = trekPackage.FromDate;
+			ViewBag.ToDate = trekPackage.ToDate;
+			//ViewBag.Title = trekPackage.Title;
+			//ViewBag.TripDuration = trekPackage.Duration;
+			ViewBag.Price = decimal.Parse(trekPackage.PricePerPerson);
+
+			//ViewBag.Currency = trekPackage.PackageCostInfo?.Currency ?? "USD";
+			//ViewBag.Slug = slug;
+			ViewBag.StripePublishableKey = _stripeSettings.PublishableKey;
+			
+
+			return View();
+		}
 
 
-        [HttpPost]
+
+		[HttpPost]
         public async Task<IActionResult> BookAndPay([FromBody] TripBookingRequest booking)
         {
             try
@@ -169,7 +192,7 @@ namespace UserRoles.Controllers
                 if (booking == null || booking.Traveler == null)
                     return BadRequest("Invalid booking data");
 
-                // 1️⃣ Save booking data to DB
+                // 1️⃣ Save booking data to DB  
                 // Example: _context.Bookings.Add(new Booking { ... });
                 // await _context.SaveChangesAsync();
 
